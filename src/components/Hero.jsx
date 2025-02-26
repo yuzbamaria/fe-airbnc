@@ -6,7 +6,7 @@ export default function Hero() {
         <>
             <section className={styles.hero}>
                 <div className={styles.container}>
-                    <img src={heroBanner} alt="holiday_property" className={styles.img} width="400px"/>
+                    <img src={heroBanner} alt="holiday_property" className={styles.heroImg} width="400px"/>
                     <div className={styles.bannerText}>
                         <h2>Discover Your Dream Stay</h2>
                     </div>
