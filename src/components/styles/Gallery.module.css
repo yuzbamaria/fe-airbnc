@@ -1,0 +1,37 @@
+.gallery_container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.galleryImg {
+    flex: 1;
+    text-align: center;
+}
+
+.image {
+    max-width: 100%;
+    height: auto;
+}
+
+.left_btn,
+.right_btn {
+    cursor: pointer;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    user-select: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+}
+
+.left_btn {
+    position: absolute;
+    left: 0;
+}
+
+.right_btn {
+    position: absolute;
+    right: 0;
+}

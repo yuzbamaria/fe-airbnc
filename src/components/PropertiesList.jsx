@@ -19,13 +19,13 @@ export default function PropertiesList() {
 
     function handlePropertyCardClick(propertyId) {
         navigate(`/property/${propertyId}`)
-    }
+    };
     
     return (
         <>
             <main>
                 <section>
-                    <ul className={styles.listContainer}>
+                    <div className={styles.listContainer}>
                         {propertiesList.map(({ image, property_name, location, price_per_night, property_id }) => (
                             <div 
                                 key={property_id} 
@@ -38,7 +38,7 @@ export default function PropertiesList() {
                                 <p className={styles.propertyPrice}>£{price_per_night} night</p>
                             </div>
                         ))}
-                    </ul>
+                    </div>
                 </section>
             </main>
         </>
