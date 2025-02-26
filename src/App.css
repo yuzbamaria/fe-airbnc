@@ -1,0 +1,67 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+.gallery-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.stacked-gallery {
+  display: flex;
+  position: relative;
+  /* width: 300px; */
+  height: 200px;
+  overflow: hidden;
+  /* overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: thin; */
+}
+
+.photo-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* object-fit: cover;
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  opacity: 0;
+  transform: translateX(100%); */
+}
+
+.left-btn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+ul {
+  padding-inline-start: 0;
+}
+
+div {
+  width: 100%;
+  overflow: hidden;
+}
+
+button {
+  margin: 0.25rem;
+}
+
+ul,
+li {
+  list-style: none;
+  white-space: nowrap;
+}
+
+li {
+  display: inline;
+  padding: 0.5rem;
+}
