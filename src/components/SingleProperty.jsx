@@ -52,10 +52,8 @@ export default function SingleProperty() {
                         <p className={styles.hostFullName}>Hosted by {property.host}</p>
                     </div>
                     <div className={styles.propertyReservationContainer}>
-                        
                         <button className={styles.reserveBtn}>Reserve</button>
                     </div>
-                    
                 </section>
             </main>
     )

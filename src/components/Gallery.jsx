@@ -22,7 +22,7 @@ export default function Gallery({ images }) {
   };
 
   const currentImage = images[index];
-  console.log(currentImage)
+  // console.log(currentImage)
   return (
     <>
       <div className={styles.gallery_container}>
