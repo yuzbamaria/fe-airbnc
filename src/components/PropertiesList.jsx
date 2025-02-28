@@ -17,18 +17,16 @@ export default function PropertiesList() {
     const isLowestCostChecked = sortByQuery === "cost_per_night" && orderQuery === "asc";
 
     function fetchProperties() {
-        const query = searchParams.toString();
-        const url = query
-          ? `https://be-airbnc-zw86.onrender.com/api/properties?${query}`
-          : "https://be-airbnc-zw86.onrender.com/api/properties";
         axios
-          .get(url)
+            .get("https://be-airbnc-zw86.onrender.com/api/properties", {
+            params: Object.fromEntries(searchParams.entries()),
+          })
           .then((response) => {
             setPropertiesList(response.data.properties);
           })
           .catch((error) => {
             console.error(error);
-          });
+        });
     };
     
     useEffect(() => {
@@ -69,6 +67,8 @@ export default function PropertiesList() {
                             <input type="radio" checked={isLowestCostChecked} name="radio" onChange={() => handleSortOption("cost_per_night", "asc")}/>
                             <span className="checkmark"></span>
                         </label>
+                        {/* Filters */}
+                        <p>Filters</p>
 
                     </div>
                     <div className={styles.listContainer}>
