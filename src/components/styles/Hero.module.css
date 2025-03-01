@@ -3,6 +3,7 @@
     width: 100vw;
     height: 40vh;
     overflow: hidden;
+    /* background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)); */
 }
 
 .container::after {
@@ -17,6 +18,7 @@
 
 .bannerText {
     position: absolute;
+    text-align: center;
     top: 2rem;
     left: 1rem;
     padding: 10px;
