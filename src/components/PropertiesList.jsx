@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./styles/PropertiesList.module.css";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import Filters from "./Filters";
 
 export default function PropertiesList() {
     const [propertiesList, setPropertiesList] = useState([]);
@@ -9,7 +10,10 @@ export default function PropertiesList() {
     const navigate = useNavigate();
 
     const sortByQuery = searchParams.get("sort");
-    const orderQuery = searchParams.get("order");   
+    const orderQuery = searchParams.get("order"); 
+    
+    const [minPrice, setMinPrice] = useState(20);
+    const [maxPrice, setMaxPrice] = useState(20);
 
     const isMostPopularChecked = sortByQuery === "popularity" && orderQuery === "desc";
     const isLeastPopularChecked = sortByQuery === "popularity" && orderQuery === "asc";
@@ -28,11 +32,11 @@ export default function PropertiesList() {
             console.error(error);
         });
     };
-    
-    useEffect(() => {
-        fetchProperties()
-    }, [searchParams]);    
 
+    useEffect(() => {
+        fetchProperties(); // Fetch all properties on initial load
+    }, []);
+      
     function handleSortOption(sort, order) {
         const newParams = new URLSearchParams(searchParams);
         newParams.set("sort", sort);
@@ -43,34 +47,47 @@ export default function PropertiesList() {
     function handlePropertyCardClick(propertyId) {
         navigate(`/property/${propertyId}`)
     };
+
+    function handleMinPriceSliderChange(e) {
+        const newMinPrice = Number(e.target.value); 
+        setMinPrice(newMinPrice); // update state
+
+        const newParams = new URLSearchParams(searchParams); // create a copy of all existing search parameters, including sort options
+        newParams.set("minprice", newMinPrice); // only update the minprice parameter
+        setSearchParams(newParams); // searchParams now include both the existing parameters and the new min price
+    };
+
+    function handleMaxPriceSliderChange(e) {
+        const newMaxPrice = Number(e.target.value);
+        setMaxPrice(newMaxPrice);
+
+        const newParams = new URLSearchParams(searchParams);
+        newParams.set("maxprice", newMaxPrice);
+        setSearchParams(newParams);
+    };
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        fetchProperties();
+    };
+
     
     return (
         <>
             <main>
                 <section>
-                    <div>
-                        {/* Sorting */}
-                        <p>Sort by</p>
-                        <label className="container">Most popular
-                            <input type="radio" name="radio" checked={isMostPopularChecked} onChange={() => handleSortOption("popularity", "desc")}/>
-                            <span className="checkmark"></span>
-                        </label>
-                        <label className="container">Least popular
-                            <input type="radio" name="radio" checked={isLeastPopularChecked} onChange={() => handleSortOption("popularity", "asc")}/>
-                            <span className="checkmark"></span>
-                        </label>
-                        <label className="container">Highest cost
-                            <input type="radio" checked={isHighestCostChecked} name="radio" onChange={() => handleSortOption("cost_per_night", "desc")}/>
-                            <span className="checkmark"></span>
-                        </label>
-                        <label className="container">Lowest cost
-                            <input type="radio" checked={isLowestCostChecked} name="radio" onChange={() => handleSortOption("cost_per_night", "asc")}/>
-                            <span className="checkmark"></span>
-                        </label>
-                        {/* Filters */}
-                        <p>Filters</p>
-
-                    </div>
+                    <Filters 
+                        minPrice={minPrice}
+                        maxPrice={maxPrice}
+                        isMostPopularChecked={isMostPopularChecked}
+                        isLeastPopularChecked={isLeastPopularChecked}
+                        isHighestCostChecked={isHighestCostChecked}
+                        isLowestCostChecked={isLowestCostChecked}
+                        handleSortOption={handleSortOption}
+                        handleMinPriceSliderChange={handleMinPriceSliderChange}
+                        handleMaxPriceSliderChange={handleMaxPriceSliderChange}
+                        handleSubmit={handleSubmit}
+                    />
                     <div className={styles.listContainer}>
                         {propertiesList.map(({ image, property_name, location, price_per_night, property_id }) => (
                             <div 
