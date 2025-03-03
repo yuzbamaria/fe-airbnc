@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import styles from "./styles/SingleProperty.module.css";
 import Gallery from "./Gallery";
+import { Link } from "react-router-dom";
 
 export default function SingleProperty() {
     const { id } = useParams();
@@ -31,7 +32,7 @@ export default function SingleProperty() {
     const images = property.images;
     return (
             <main>
-                <section>
+                <section className={styles.propertySection}>
                     <div className={styles.photoGallery}>
                         <Gallery images={images}/>
                     </div>
@@ -39,6 +40,10 @@ export default function SingleProperty() {
                         <h2 className={styles.singlePropertyName}>{property.property_name}</h2>
                         <p className={styles.singlePropertyDescription}>{property.description}</p>
                         <p className={styles.singlePropertyLocation}>Located in {property.location}</p>
+                        <Link 
+                            to={`/property/${id}/reviews`} 
+                            className={styles.reviewsLink}>Reviews
+                        </Link>
                         <p><span style={{ fontWeight: 'bold'}}>£{property.price_per_night}</span> per night</p>
                     </div>
                     <div className={styles.host_info}>

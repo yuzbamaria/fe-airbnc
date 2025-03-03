@@ -1,3 +1,8 @@
+.propertySection {
+    width: 100%;
+    margin-bottom: 40px;
+}
+
 .propertyInfoContainer {
     display: flex;
     flex-direction: column;
@@ -20,6 +25,21 @@
     font-size: 0.8rem;
     font-weight: bold;
 }
+
+.reviewsLink {
+    font-size: 0.8rem;
+    color: black;
+}
+
+.reviewsLink:active, .reviewsLink:hover {
+    color: #497ad6;
+    font-weight: bold;
+}
+
+.reviewsLink:active {
+    color: red;
+}
+
 
 .host_info {
     display: flex;
@@ -54,7 +74,7 @@
 
 .propertyReservationContainer {
     margin: 0 20px;
-    padding: 10px 0;
+    padding: 20px 0;
 }
 
 .reserveBtn {
@@ -63,4 +83,14 @@
     border: none;
     background-color: #7b9bd6;
     font-size: 1.3rem;
+}
+
+.reserveBtn:hover {
+    background-color: white;
+    color: #497ad6;
+    border: 2px solid #497ad6;
+}
+
+.reserveBtn:active {
+    color: red;
 }

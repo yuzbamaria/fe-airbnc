@@ -3,6 +3,8 @@ import axios from "axios";
 import styles from "./styles/PropertiesList.module.css";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Filters from "./Filters";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSliders } from '@fortawesome/free-solid-svg-icons';
 
 export default function PropertiesList() {
     const [propertiesList, setPropertiesList] = useState([]);
@@ -76,6 +78,14 @@ export default function PropertiesList() {
         <>
             <main>
                 <section>
+                    <button 
+                        // onClick={toggleMobileMenu}
+                        className={styles.filtersIcon} 
+                        aria-label="Toggle filters"
+                    >
+                        <FontAwesomeIcon icon={faSliders} />
+                        Filters
+                    </button>
                     <Filters 
                         minPrice={minPrice}
                         maxPrice={maxPrice}

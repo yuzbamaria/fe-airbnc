@@ -1,0 +1,9 @@
+.checked {
+    font-size: 0.8rem; 
+    color: #7b9bd6;
+}
+
+.empty {
+    font-size: 0.8rem;  
+    color: #e4e5e9;
+}
