@@ -36,7 +36,11 @@ export default function Header() {
                             </div>
                         </>
                     )}
-                    <h1>AirbNC</h1>
+                    <h1>
+                        <Link to={`/`} className={styles.logo}>
+                            AirbNC
+                        </Link>
+                    </h1>
                     <ul>
                         <li>Guest</li>
                         <li>Host</li>

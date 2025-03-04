@@ -22,9 +22,19 @@ nav {
 
 h1 {
     font-family: "Montserrat", serif;
-    font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
+}
+
+.logo {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+.logo:hover {
+    color: #497ad6;
+    font-weight: 500;
 }
 
 .menuIcon {
