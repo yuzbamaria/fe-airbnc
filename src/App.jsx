@@ -5,6 +5,9 @@ import Home from "./components/Home";
 import Footer from "./components/Footer";
 import SingleProperty from "./components/SingleProperty";
 import Reviews from "./components/Reviews";
+import PropertyBooking from "./components/PropertyBooking";
+import BookingConfirmation from "./components/BookingConfirmation";
+
 
 function App() {
   return (
@@ -15,6 +18,8 @@ function App() {
           <Route path="/contacts" element={<Footer />} />
           <Route path="/property/:id" element={<SingleProperty />} />
           <Route path="/property/:id/reviews" element={<Reviews />} />
+          <Route path="/properties/:id/booking" element={<PropertyBooking />} />
+          <Route path="/booking-confirmation" element={<BookingConfirmation />} />
         </Routes>
       <Footer />
     </>

@@ -42,7 +42,9 @@ export default function SingleProperty() {
                         <p className={styles.singlePropertyLocation}>Located in {property.location}</p>
                         <Link 
                             to={`/property/${id}/reviews`} 
-                            className={styles.reviewsLink}>Reviews
+                            className={styles.reviewsLink}
+                        >
+                            Reviews
                         </Link>
                         <p><span style={{ fontWeight: 'bold'}}>£{property.price_per_night}</span> per night</p>
                     </div>
@@ -57,7 +59,12 @@ export default function SingleProperty() {
                         <p className={styles.hostFullName}>Hosted by {property.host}</p>
                     </div>
                     <div className={styles.propertyReservationContainer}>
-                        <button className={styles.reserveBtn}>Reserve</button>
+                        <Link 
+                            to={`/properties/${id}/booking`} 
+                            className={styles.reserveBtn}
+                        >
+                            Reserve
+                        </Link>
                     </div>
                 </section>
             </main>

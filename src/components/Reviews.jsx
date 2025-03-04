@@ -10,7 +10,6 @@ export default function Reviews() {
     useEffect(() => {
         axios.get(`https://be-airbnc-zw86.onrender.com/api/properties/${id}/reviews`)
             .then((response) => {
-                console.log(response.data.reviews);
                 setReviews(response.data.reviews);
         })
             .catch((error) => {

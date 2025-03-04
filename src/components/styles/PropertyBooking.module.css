@@ -1,0 +1,51 @@
+.propertyBookingHeading {
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 40px 20px 10px;
+}
+
+.bookingForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 5px;
+    /* background-color: #7b9bd6; */
+    /* background-image: linear-gradient(to right top, #f8f8f8, #eeeff4, #e3e6f0, #d6ddec, #c8d5e8); */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 
+                0 6px 20px rgba(0, 0, 0, 0.1); */
+}
+
+.bookingFormLabel {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.bookingFormInput {
+    width: 100%;
+    height: 2.5rem;
+    border: 1px solid black;;
+    border-radius: 8px;
+    padding: 5px;
+    /* font-weight: 300; */
+}
+
+.bookingBtn {
+    display: inline-block;
+    padding: 1rem 3rem;
+    margin-top: 30px;
+    border-radius: 15px;
+    border: none;
+    background-color: #7b9bd6;
+    font-size: 1.3rem;
+    text-decoration: none;
+    color: black;
+    font-family: Montserrat;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 
+                0 6px 20px rgba(0, 0, 0, 0.1);
+}
