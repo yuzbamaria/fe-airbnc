@@ -16,7 +16,7 @@ export default function GuestBookings({id}) {
         <>
             <section className={styles.guestBookings}>
                 <h3 className={styles.guestBookingsHeading}>Bookings</h3>
-                {guestBookings.map(({ booking_id, check_in_date, check_out_date, property_id, property_name, host, image }, i) => (
+                {guestBookings.map(({ check_in_date, check_out_date, property_name, host, image }, i) => (
                     <div className={styles.bookingCard} key={i}>
                         <p>You booked a stay at <span className={styles.mainInfo}>{property_name}</span></p>
                         <img src={image} alt={property_name} className={styles.itemImg}/>
