@@ -7,7 +7,7 @@ import { useUser } from "../contexts/UserContext";
 
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const { guestId } = useUser();
+    const { guestId, hostId } = useUser();
 
     function toggleMobileMenu() {
         setIsMenuOpen(!isMenuOpen);
@@ -43,7 +43,7 @@ export default function Header() {
                     </h1>
                     <ul>
                         <li><Link to={`/users/${guestId}`} className={styles.modesLinks}>Guest</Link></li>
-                        <li className={styles.modesLinks}>Host</li>
+                        <li><Link to={`/properties?host=${hostId}`} className={styles.modesLinks}>Host</Link></li>
                     </ul>
                 </nav>   
             </header> 

@@ -8,6 +8,7 @@ import Reviews from "./components/Reviews";
 import PropertyBooking from "./components/PropertyBooking";
 import BookingConfirmation from "./components/BookingConfirmation";
 import GuestProfile from "./components/GuestProfile";
+import HostDashboard from "./components/HostDashboard";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path="/properties/:id/booking" element={<PropertyBooking />} />
           <Route path="/booking-confirmation" element={<BookingConfirmation />} />
           <Route path="/users/:id" element={<GuestProfile />} />
+          <Route path="/properties" element={<HostDashboard />} />
         </Routes>
       <Footer />
     </>

@@ -4,12 +4,6 @@ import styles from "./styles/Gallery.module.css"
 export default function Gallery({ images }) {
   const [index, setIndex] = useState(0);
 
-  // const gallery = [
-  //   { link: "https://placecats.com/neo/200/200", alt: "Neo" },
-  //   { link: "https://placecats.com/millie/200/200", alt: "Millie" },
-  //   { link: "https://placecats.com/bella/199/200", alt: "Bella" },
-  // ];
-
   const nextImage = () => {
     setIndex((prevIndex) => (prevIndex + 1) % images.length);
   };
@@ -22,7 +16,7 @@ export default function Gallery({ images }) {
   };
 
   const currentImage = images[index];
-  // console.log(currentImage)
+
   return (
     <>
       <div className={styles.gallery_container}>
