@@ -33,7 +33,7 @@ export default function PropertyBooking() {
     };
     
     function handleBookingPropertySubmit(e) {
-        console.log("Form submitted")
+        // console.log("Form submitted")
         e.preventDefault();
         bookProperty();
     };

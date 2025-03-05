@@ -44,7 +44,11 @@ h1 {
     background-color: white;
     font-size: 1.6rem; 
     color: black;
-  }
+}
+
+.menuIcon:hover {
+    color: #497ad6;
+}
 
 .hidden {
     display: none;
@@ -81,4 +85,16 @@ h1 {
 
 .navLink:active, .navLink:hover {
     color: red;
-  }
+}
+
+.modesLinks {
+    text-decoration: none;
+    color: black;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.modesLinks:hover {
+    cursor: pointer;
+    color: #497ad6;
+}

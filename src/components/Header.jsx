@@ -3,9 +3,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { Link } from "react-router-dom"; 
 import { useState } from "react";
+import { useUser } from "../contexts/UserContext";
 
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const { guestId } = useUser();
 
     function toggleMobileMenu() {
         setIsMenuOpen(!isMenuOpen);
@@ -37,13 +39,11 @@ export default function Header() {
                         </>
                     )}
                     <h1>
-                        <Link to={`/`} className={styles.logo}>
-                            AirbNC
-                        </Link>
+                        <Link to={`/`} className={styles.logo}>AirbNC</Link>
                     </h1>
                     <ul>
-                        <li>Guest</li>
-                        <li>Host</li>
+                        <li><Link to={`/users/${guestId}`} className={styles.modesLinks}>Guest</Link></li>
+                        <li className={styles.modesLinks}>Host</li>
                     </ul>
                 </nav>   
             </header> 
