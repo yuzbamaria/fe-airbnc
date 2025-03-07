@@ -37,10 +37,13 @@ h1 {
     font-weight: 500;
 }
 
+.logo:active {
+    color: red;
+}
+
 .menuIcon {
     cursor: pointer;
     border: none; 
-    /* #F2F2F5 */
     background-color: white;
     font-size: 1.6rem; 
     color: black;
@@ -48,6 +51,10 @@ h1 {
 
 .menuIcon:hover {
     color: #497ad6;
+}
+
+.menuIcon:active {
+    color: red;
 }
 
 .hidden {
@@ -97,4 +104,8 @@ h1 {
 .modesLinks:hover {
     cursor: pointer;
     color: #497ad6;
+}
+
+.modesLinks:active {
+    color: red;
 }

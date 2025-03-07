@@ -8,6 +8,7 @@ import { faSliders } from '@fortawesome/free-solid-svg-icons';
 
 export default function PropertiesList() {
     const [propertiesList, setPropertiesList] = useState([]);
+    const [isFiltersOpen, setIsFiltersOpen] = useState(false);
     const [searchParams, setSearchParams] = useSearchParams();
     const navigate = useNavigate();
 
@@ -73,20 +74,25 @@ export default function PropertiesList() {
         fetchProperties();
     };
 
+    function handleFiltersBtnClick() {
+        setIsFiltersOpen(!isFiltersOpen);
+    };
+
     
     return (
         <>
             <main>
                 <section>
-                    <button 
-                        // onClick={toggleMobileMenu}
+                    
+                    <button
+                        onClick={handleFiltersBtnClick} 
                         className={styles.filtersIcon} 
                         aria-label="Toggle filters"
                     >
                         <FontAwesomeIcon icon={faSliders} />
-                        Filters
                     </button>
-                    <Filters 
+                    {isFiltersOpen && (
+                        <Filters 
                         minPrice={minPrice}
                         maxPrice={maxPrice}
                         isMostPopularChecked={isMostPopularChecked}
@@ -97,7 +103,9 @@ export default function PropertiesList() {
                         handleMinPriceSliderChange={handleMinPriceSliderChange}
                         handleMaxPriceSliderChange={handleMaxPriceSliderChange}
                         handleSubmit={handleSubmit}
-                    />
+                        />
+                    )}
+                    
                     <div className={styles.listContainer}>
                         {propertiesList.map(({ image, property_name, location, price_per_night, property_id }) => (
                             <div 

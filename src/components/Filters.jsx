@@ -13,7 +13,6 @@ export default function Filters({
     handleSubmit
 }) {
     return (
-        <>
             <form 
                 onSubmit={handleSubmit}
                 className={styles.filtersContainer}
@@ -88,6 +87,5 @@ export default function Filters({
                     className={styles.filtersSubmitBtn}
                 />
             </form>
-        </>
     )
 };

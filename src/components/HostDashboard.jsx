@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 import styles from "./styles/HostDashboard.module.css";
-import StarRating from "./StarRating";
+// import StarRating from "./StarRating";
 
 export default function HostDashboard() {
     const [searchParams] = useSearchParams();
