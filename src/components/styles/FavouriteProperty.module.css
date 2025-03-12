@@ -1,0 +1,19 @@
+.favouriteBtn {
+    background-color: white;
+    border: none;
+}
+
+.heartIcon {
+    font-size: 1.5rem;
+    font-weight: 200;
+}
+
+.favourited {
+    color: #497ad6; 
+    font-size: 1.5rem;
+}
+
+.heartIcon:hover {
+    cursor: pointer;
+    color: #497ad6; 
+}

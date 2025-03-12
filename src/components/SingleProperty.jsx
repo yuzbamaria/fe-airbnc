@@ -4,6 +4,7 @@ import axios from "axios";
 import styles from "./styles/SingleProperty.module.css";
 import Gallery from "./Gallery";
 import { Link } from "react-router-dom";
+import FavouriteProperty from "./FavouriteProperty";
 
 export default function SingleProperty() {
     const { id } = useParams();
@@ -37,7 +38,10 @@ export default function SingleProperty() {
                         <Gallery images={images}/>
                     </div>
                     <div className={styles.propertyInfoContainer}>
-                        <h2 className={styles.singlePropertyName}>{property.property_name}</h2>
+                        <div className={styles.topContainerInfo}>
+                            <h2 className={styles.singlePropertyName}>{property.property_name}</h2>
+                            <FavouriteProperty />
+                        </div>
                         <p className={styles.singlePropertyDescription}>{property.description}</p>
                         <p className={styles.singlePropertyLocation}>Located in {property.location}</p>
                         <Link 
