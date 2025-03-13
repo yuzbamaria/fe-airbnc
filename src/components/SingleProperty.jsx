@@ -63,6 +63,7 @@ export default function SingleProperty() {
                         <p className={styles.hostFullName}>Hosted by {property.host}</p>
                     </div>
                     <div className={styles.propertyReservationContainer}>
+                        
                         <Link 
                             to={`/properties/${id}/booking`} 
                             className={styles.reserveBtn}

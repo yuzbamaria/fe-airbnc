@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import StarRating from "./StarRating";
+import { Link } from "react-router-dom";
 
 export default function Reviews() {
     const [reviews, setReviews] = useState([]);
@@ -42,6 +43,15 @@ export default function Reviews() {
                             </div>
                         ))}
                     </div>
+                    <div className={styles.addReviewBtnContainer}>
+                        <Link 
+                            to={`/properties/${id}/reviews`} 
+                            className={styles.addReviewBtn}
+                        >
+                            Add a review
+                        </Link>
+                    </div>
+                    
                 </section>
             </main>
         </>

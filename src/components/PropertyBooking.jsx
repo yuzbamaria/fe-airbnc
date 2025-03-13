@@ -9,14 +9,10 @@ export default function PropertyBooking() {
     const { id } = useParams();
     const { guestId } = useUser();
     const navigate = useNavigate();
-    // const [firstName, setFirstName] = useState("");
-    // const [lastName, setLastName] = useState("");
     const [checkInDate, setCheckInDate] = useState("");
     const [checkOutDate, setCheckOutDate] = useState("");
 
     const userData = {
-        // firstName,
-        // lastName,
         guest_id: guestId,
         check_in_date: checkInDate,
         check_out_date: checkOutDate
@@ -33,14 +29,11 @@ export default function PropertyBooking() {
     };
     
     function handleBookingPropertySubmit(e) {
-        // console.log("Form submitted")
         e.preventDefault();
         bookProperty();
     };
 
-
     return (
-        <>
             <main>
                 <h2 className={styles.propertyBookingHeading}>Enter your details:</h2>
                 <form className={styles.bookingForm} onSubmit={handleBookingPropertySubmit}>
@@ -57,30 +50,7 @@ export default function PropertyBooking() {
                             readOnly
                         />
                     </label>
-                    {/* <label htmlFor="first_name" className={styles.bookingFormLabel}>
-                        First name:
-                        <br />
-                        <input 
-                            type="text" 
-                            value={firstName} 
-                            name="first_name" 
-                            className={styles.bookingFormInput}
-                            onChange={(e) => setFirstName(e.target.value)}
-                            required
-                        />
-                    </label>
-                     */}
-                    {/* <label htmlFor="last_name" className={styles.bookingFormLabel}>
-                        Last name:
-                        <input 
-                            type="text" 
-                            value={lastName} 
-                            name="last_name" 
-                            className={styles.bookingFormInput}
-                            onChange={(e) => setLastName(e.target.value)}
-                            required/>
-                    </label> */}
-
+                    
                     <label htmlFor="check_in_date" className={styles.bookingFormLabel}>
                         Check-in date:
                         <br />
@@ -114,6 +84,5 @@ export default function PropertyBooking() {
                     />
                 </form>
             </main>
-        </>
     )
 }

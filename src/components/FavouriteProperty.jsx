@@ -31,6 +31,7 @@ export default function FavouriteProperty() {
             };
         };
         fetchFavouriteStatus();
+        
     }, [guestId, id, favouriteId]);
 
     async function handleFavouriteClick() {
