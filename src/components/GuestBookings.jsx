@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./styles/GuestBookings.module.css";
+import { Link } from "react-router-dom";
 
 export default function GuestBookings({id}) {
     const [guestBookings, setGuestBookings] = useState([]);
@@ -33,6 +34,21 @@ export default function GuestBookings({id}) {
                         </div>
                         
                         <p>Hosted by <span className={styles.mainInfo}>{host}</span></p>
+                        <div className={styles.bookingBtnsContainer}>
+                            <Link
+                                to={`/bookings/${id}`} 
+                                className={styles.editBookingBtn}
+                            >
+                                Edit booking
+                            </Link>
+                            <Link
+                                to={`/bookings/${id}`} 
+                                className={styles.deleteBookingBtn}
+                            >
+                                Delete booking
+                            </Link>
+                        </div>
+
                     </div>
                 ))
                 }  
