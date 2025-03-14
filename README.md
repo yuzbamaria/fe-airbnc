@@ -10,9 +10,9 @@ This is Airbnb-style application that allows users to ...
 ## Main Features
 
 ### Property Listings
--- Browse a wide selection of vacation properties with detailed descriptions, pricing, and host information.
--- Filter properties by price range, host, or popularity.
--- Sort properties by cost per night or popularity in ascending/descending order.
+- Browse a wide selection of vacation properties with detailed descriptions, pricing, and host information.
+- Filter properties by price range, host, or popularity.
+- Sort properties by cost per night or popularity in ascending/descending order.
 
 ### Property Details
 -- View detailed property information, including location, price, host details, and description.
