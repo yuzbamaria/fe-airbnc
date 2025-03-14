@@ -3,7 +3,9 @@
 
 ## Description 
 This is Airbnb-style application that allows users to ...
+
 ## Live View
+https://airbnc-front-end.netlify.app/ 
 
 ## Table of Contents
 
@@ -38,7 +40,7 @@ This is Airbnb-style application that allows users to ...
 ## Screenshots 
 
 ## Back-end repo
-https://airbnc-front-end.netlify.app/ 
+https://github.com/yuzbamaria/be-airbnc 
 
 ## Endpoints list
 https://be-airbnc-zw86.onrender.com/description.html
