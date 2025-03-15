@@ -56,6 +56,23 @@ https://airbnc-front-end.netlify.app/
 
 ## Tech Stack 
 
+### Front-end: 
+- **Technologies:** React, React Router, Axios, CSS
+- **Deployment:** Netlify  
+
+### Back-end:
+- **Backend:** Node.js, Express.js
+- **Database:** PostgreSQL
+- **Database Client:** Node-Postgres (pg)
+- **Testing:** Jest (unit testing), Supertest (integration testing), Postman (manual testing of endpoints and simulating requests)  
+- **Architecture:** MVC (Model-View-Controller)
+- **Version Control:** Git, GitHub
+- **Database Hosting:** Supabase  
+- **API Hosting:** Render
+
+### Project Management: 
+Trello
+
 ## Installation (and requirements of versions)
 ## Screenshots 
 
