@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./styles/GuestBookings.module.css";
-import { Link } from "react-router-dom";
 
 export default function GuestBookings({id}) {
     const [guestBookings, setGuestBookings] = useState([]);
@@ -11,16 +10,22 @@ export default function GuestBookings({id}) {
         .then((res) => {
             setGuestBookings(res.data.bookings);
         })
-}, [id]);
-    
+    }, [id]);
+
+    function handleDeleteBookingBtnClick(bookingId) {
+        axios.delete(`https://be-airbnc-zw86.onrender.com/api/bookings/${bookingId}`)
+            .then(() => {
+                setGuestBookings((prevBookings) => prevBookings.filter(({booking_id}) => booking_id !== bookingId))
+            });
+    }
+
     return (
-        <>
             <section className={styles.guestBookings}>
                 <h3 className={styles.guestBookingsHeading}>Bookings</h3>
-                {guestBookings.map(({ check_in_date, check_out_date, property_name, host, image }, i) => (
+                {guestBookings.map(({ booking_id, check_in_date, check_out_date, property_name, host, images }, i) => (
                     <div className={styles.bookingCard} key={i}>
                         <p>You booked a stay at <span className={styles.mainInfo}>{property_name}</span></p>
-                        <img src={image} alt={property_name} className={styles.itemImg}/>
+                        <img src={images[0]} alt={property_name} className={styles.itemImg}/>
                         
                         <div className={styles.datesContainer}>
                             <p className={styles.mainInfoCategory}>Check-in-date:</p>
@@ -35,24 +40,22 @@ export default function GuestBookings({id}) {
                         
                         <p>Hosted by <span className={styles.mainInfo}>{host}</span></p>
                         <div className={styles.bookingBtnsContainer}>
-                            <Link
-                                to={`/bookings/${id}`} 
+                            <button
                                 className={styles.editBookingBtn}
                             >
                                 Edit booking
-                            </Link>
-                            <Link
-                                to={`/bookings/${id}`} 
+                            </button>
+                            <button
+                                onClick={() => handleDeleteBookingBtnClick(booking_id)}
                                 className={styles.deleteBookingBtn}
                             >
                                 Delete booking
-                            </Link>
+                            </button>
                         </div>
 
                     </div>
                 ))
                 }  
             </section>
-        </>
     )
 }
