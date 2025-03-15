@@ -2,12 +2,31 @@
 (under developmemnt)
 
 ## Description 
-This is Airbnb-style application that allows users to ...
+This project is a vacation property listing platform, similar to Booking or Airbnb, that allows users to explore available properties, view detailed information on each property, and manage their bookings. The application fetches data from a database and dynamically displays properties based on user preferences.
+
+Users can:
+- Browse and filter vacation properties by price or popularity.
+- View detailed property information, including pricing, host details, and availability.
+- Mark properties as favorites for easy access later.
+- Book properties, edit and delete bookings, and retrieve past reservations.
+- Leave and delete reviews for properties they’ve stayed in.
+- Leave ratings for properties they’ve stayed in.
+- Update their user profile, including name, email, phone number, and avatar.
+
+Built with **React**, **Node.js**, **Express**, and **PostgreSQL**, this app provides a seamless and responsive experience for users looking for vacation rentals.
 
 ## Live View
 https://airbnc-front-end.netlify.app/ 
 
 ## Table of Contents
+[Description](#description)  
+[Live View](#live-view)  
+[Main Features](#main-features)  
+[Tech Stack](#tech-stack)  
+[Installation and Requirements](#installation-and-requirements)  
+[Screenshots](#screenshots)  
+[Back-end Repo](#back-end-repo)  
+[Endpoints List](#endpoints-list)  
 
 ## Main Features
 
@@ -36,6 +55,7 @@ https://airbnc-front-end.netlify.app/
 - Retrieve all bookings made by a user, ordered by check-in date.
 
 ## Tech Stack 
+
 ## Installation (and requirements of versions)
 ## Screenshots 
 
