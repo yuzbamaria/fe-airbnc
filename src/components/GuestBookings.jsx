@@ -89,51 +89,53 @@ export default function GuestBookings({id}) {
                         </div>
                         
                         {editingBookingId === booking_id && updatedBooking && (
-                             
-                            <form 
-                                className={styles.editBookingForm} 
-                                onSubmit={handleSaveChangesBtn}
-                            > 
-                                <label htmlFor="check_in_date" className={styles.editBookingFormLabel}>
-                                    Check-in date:
+                            <div className={styles.editBookingSection}>
+                                <h4 className={styles.editBookingHeading}>Edit your booking:</h4>
+                                <form 
+                                    className={styles.editBookingForm} 
+                                    onSubmit={handleSaveChangesBtn}
+                                > 
+                                    <label htmlFor="check_in_date" className={styles.editBookingFormLabel}>
+                                        Check-in date:
+                                        <br />
+                                        <input 
+                                            type="date" 
+                                            id="check_in_date"
+                                            value={updatedBooking.check_in_date} 
+                                            name="check_in_date" 
+                                            className={styles.editBookingFormInput}
+                                            onChange={(e) => setUpdatedBooking({
+                                                ...updatedBooking,
+                                                check_in_date: e.target.value
+                                            })}
+                                            required/>
+                                    </label>
                                     <br />
-                                    <input 
-                                        type="date" 
-                                        id="check_in_date"
-                                        value={updatedBooking.check_in_date} 
-                                        name="check_in_date" 
-                                        className={styles.editBookingFormInput}
-                                        onChange={(e) => setUpdatedBooking({
-                                            ...updatedBooking,
-                                            check_in_date: e.target.value
-                                        })}
-                                        required/>
-                                </label>
-                                <br />
-            
-                                <label htmlFor="check_out_date" className={styles.bookingFormLabel}>
-                                    Check-out date:
+                
+                                    <label htmlFor="check_out_date" className={styles.editBookingFormLabel}>
+                                        Check-out date:
+                                        <br />
+                                        <input 
+                                            type="date" 
+                                            id="check_out_date" 
+                                            value={updatedBooking.check_out_date} 
+                                            name="check_out_date" 
+                                            className={styles.editBookingFormInput}
+                                            onChange={(e) => setUpdatedBooking({
+                                                ...updatedBooking,
+                                                check_out_date: e.target.value
+                                            })}
+                                            required/>
+                                    </label>
                                     <br />
+                                    
                                     <input 
-                                        type="date" 
-                                        id="check_out_date" 
-                                        value={updatedBooking.check_out_date} 
-                                        name="check_out_date" 
-                                        className={styles.editBookingFormInput}
-                                        onChange={(e) => setUpdatedBooking({
-                                            ...updatedBooking,
-                                            check_out_date: e.target.value
-                                        })}
-                                        required/>
-                                </label>
-                                <br />
-                                
-                                <input 
-                                    type="submit" 
-                                    value="Save changes" 
-                                    className={styles.editBookingBtn}
-                                />
-                            </form>
+                                        type="submit" 
+                                        value="Save changes" 
+                                        className={styles.saveChangesBtn}
+                                    />
+                                </form>
+                            </div> 
                         )}
                     </div>
                 ))
