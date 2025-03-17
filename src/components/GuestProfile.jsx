@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./styles/GuestProfile.module.css";
 import GuestBookings from "./GuestBookings";
+import formatDate from "../utils";
 
 export default function GuestProfile() {
     const { id } = useParams();
@@ -50,7 +51,7 @@ export default function GuestProfile() {
                         </div>
                         <div className={styles.guestPersonalInfo}>
                             <p className={styles.categoryName}>User since:</p>
-                            <p className={styles.guestiInfo}>{guest.created_at.slice(0, 10)}</p>
+                            <p className={styles.guestiInfo}>{formatDate(guest.created_at)}</p>
                         </div>
                     </div>
                 </section>
