@@ -7,6 +7,8 @@ export default function GuestBookings({id}) {
     const [guestBookings, setGuestBookings] = useState([]);
     const [updatedBooking, setUpdatedBooking] = useState(null);
     const [editingBookingId, setEditingBookingId] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [successMessage, setSuccessMessage] = useState(false);
 
     useEffect(() => {
         axios.get(`https://be-airbnc-zw86.onrender.com/api/users/${id}/bookings`)
@@ -23,6 +25,7 @@ export default function GuestBookings({id}) {
     };
 
     function editBookingBtnClick(booking) {
+        setIsModalOpen(true);
         setUpdatedBooking(booking);
         setEditingBookingId(booking.booking_id);
 
@@ -44,7 +47,7 @@ export default function GuestBookings({id}) {
                         : booking
                 );
                 setGuestBookings(newGuestBookings);
-                setEditingBookingId(null);
+                setSuccessMessage(true);
             })
             .catch((err) => {
                 console.error('Error updating booking:', err); 
@@ -52,6 +55,11 @@ export default function GuestBookings({id}) {
                     console.error('Error Response:', err.response); 
                 }
             });
+    };
+
+    function handleCloseModal() {
+        setIsModalOpen(false);
+        setEditingBookingId(null);
     };
 
     return (
@@ -88,54 +96,65 @@ export default function GuestBookings({id}) {
                             </button>
                         </div>
                         
-                        {editingBookingId === booking_id && updatedBooking && (
-                            <div className={styles.editBookingSection}>
-                                <h4 className={styles.editBookingHeading}>Edit your booking:</h4>
-                                <form 
-                                    className={styles.editBookingForm} 
-                                    onSubmit={handleSaveChangesBtn}
-                                > 
-                                    <label htmlFor="check_in_date" className={styles.editBookingFormLabel}>
-                                        Check-in date:
-                                        <br />
-                                        <input 
-                                            type="date" 
-                                            id="check_in_date"
-                                            value={updatedBooking.check_in_date} 
-                                            name="check_in_date" 
-                                            className={styles.editBookingFormInput}
-                                            onChange={(e) => setUpdatedBooking({
-                                                ...updatedBooking,
-                                                check_in_date: e.target.value
-                                            })}
-                                            required/>
-                                    </label>
-                                    <br />
-                
-                                    <label htmlFor="check_out_date" className={styles.editBookingFormLabel}>
-                                        Check-out date:
-                                        <br />
-                                        <input 
-                                            type="date" 
-                                            id="check_out_date" 
-                                            value={updatedBooking.check_out_date} 
-                                            name="check_out_date" 
-                                            className={styles.editBookingFormInput}
-                                            onChange={(e) => setUpdatedBooking({
-                                                ...updatedBooking,
-                                                check_out_date: e.target.value
-                                            })}
-                                            required/>
-                                    </label>
-                                    <br />
+                        {isModalOpen && editingBookingId === booking_id && updatedBooking && (
+                            <div className={styles.editBookingModal}>
+                                <div className={styles.editBookingSection}>
+                                    <div className={styles.modalTop}>
+                                        <h4 className={styles.editBookingHeading}>Edit your booking:</h4>
+                                        <span className={styles.closeModalIcon} onClick={handleCloseModal}>&times;</span>
+                                    </div>
                                     
-                                    <input 
-                                        type="submit" 
-                                        value="Save changes" 
-                                        className={styles.saveChangesBtn}
-                                    />
-                                </form>
-                            </div> 
+                                    <form 
+                                        className={styles.editBookingForm} 
+                                        onSubmit={handleSaveChangesBtn}
+                                    > 
+                                        <label htmlFor="check_in_date" className={styles.editBookingFormLabel}>
+                                            Check-in date:
+                                            <br />
+                                            <input 
+                                                type="date" 
+                                                id="check_in_date"
+                                                value={updatedBooking.check_in_date} 
+                                                name="check_in_date" 
+                                                className={styles.editBookingFormInput}
+                                                onChange={(e) => setUpdatedBooking({
+                                                    ...updatedBooking,
+                                                    check_in_date: e.target.value
+                                                })}
+                                                required/>
+                                        </label>
+                                        <br />
+                    
+                                        <label htmlFor="check_out_date" className={styles.editBookingFormLabel}>
+                                            Check-out date:
+                                            <br />
+                                            <input 
+                                                type="date" 
+                                                id="check_out_date" 
+                                                value={updatedBooking.check_out_date} 
+                                                name="check_out_date" 
+                                                className={styles.editBookingFormInput}
+                                                onChange={(e) => setUpdatedBooking({
+                                                    ...updatedBooking,
+                                                    check_out_date: e.target.value
+                                                })}
+                                                required/>
+                                        </label>
+                                        <br />
+
+                                        {successMessage && (
+                                            <p className={styles.successMessage}>Your booking is successfully updated!</p>
+                                        )}
+
+                                        
+                                        <input 
+                                            type="submit" 
+                                            value="Save changes" 
+                                            className={styles.saveChangesBtn}
+                                        />
+                                    </form>
+                                </div> 
+                            </div>
                         )}
                     </div>
                 ))
