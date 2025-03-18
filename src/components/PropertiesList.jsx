@@ -89,7 +89,8 @@ export default function PropertiesList() {
                         className={styles.filtersIcon} 
                         aria-label="Toggle filters"
                     >
-                        <FontAwesomeIcon icon={faSliders} />
+                        <FontAwesomeIcon icon={faSliders} className={styles.bars}/>
+                        Filters
                     </button>
                     {isFiltersOpen && (
                         <Filters 

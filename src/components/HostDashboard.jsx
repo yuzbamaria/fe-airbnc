@@ -14,7 +14,6 @@ export default function HostDashboard() {
             params: searchParams
         })
         .then((res) => {
-            console.log(res.data.properties)
             setHostBookings(res.data.properties)
         })
     }, [hostId]);
