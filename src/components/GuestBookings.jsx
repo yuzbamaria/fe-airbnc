@@ -28,7 +28,6 @@ export default function GuestBookings({id}) {
         setIsModalOpen(true);
         setUpdatedBooking(booking);
         setEditingBookingId(booking.booking_id);
-
     };
 
     function handleSaveChangesBtn(e) {
@@ -146,7 +145,6 @@ export default function GuestBookings({id}) {
                                             <p className={styles.successMessage}>Your booking is successfully updated!</p>
                                         )}
 
-                                        
                                         <input 
                                             type="submit" 
                                             value="Save changes" 

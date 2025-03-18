@@ -14,6 +14,7 @@ export default function HostDashboard() {
             params: searchParams
         })
         .then((res) => {
+            console.log(res.data.properties)
             setHostBookings(res.data.properties)
         })
     }, [hostId]);
@@ -24,12 +25,12 @@ export default function HostDashboard() {
                 <section className={styles.dashboard}>
                     <p className={styles.dashboardHeading}>Dashboard</p>
                     <p className={styles.dashboardSubheading}>Owned properties</p>
-                    {hostBookings.map(({ property_name, location, price_per_night, image }, id) => (
+                    {hostBookings.map(({ property_name, location, price_per_night, images }, id) => (
                         <div key={id} className={styles.hostBookedPropertiesCard}>
                             <p>{property_name}</p>
                             <p>{location}</p>
                             <p>£{price_per_night} night</p>
-                            <img src={image} alt={property_name} className={styles.itemImg} />
+                            <img src={images[0]} alt={property_name} className={styles.itemImg} />
                         </div>
                     ))}
                 </section>
