@@ -1,4 +1,4 @@
-.guestBookings {
+.guestBookingsSection {
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -9,6 +9,7 @@
     font-size: 1.5rem;
     font-weight: 500;
     margin: 30px 0;
+    padding: 10px 0;
 }
 
 .bookingCard {
@@ -25,6 +26,12 @@
 }
 
 .datesContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.dateContainer {
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -151,4 +158,84 @@
 .successMessage {
     font-size: 0.9rem;
     color: red;
+}
+
+@media only screen and (min-width: 481px) {
+    .guestBookingsSection {
+        padding: 20px 30px;
+    }
+    .bookingsContainer {
+        display: flex; 
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+    .bookingCard {
+        width: 370px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto auto auto auto;
+        grid-template-areas: 
+            "message message"
+            "datesContainer itemImg"
+            "datesContainer itemImg"
+            "hostInfo hostInfo"
+            "bookingBtnsContainer bookingBtnsContainer";
+        justify-items: center;
+        gap: 5px;
+    }
+    .message {
+        grid-area: message;
+        padding: 5px;
+        place-self: center;
+    }
+    .datesContainer {
+        grid-area: datesContainer;
+        justify-content: center;
+    }
+    .itemImg {
+        grid-area: itemImg;
+        padding: 7px;
+        height: 150px;
+    }
+    .hostInfo {
+        grid-area: hostInfo;
+    }
+    .bookingBtnsContainer {
+        grid-area: bookingBtnsContainer;
+        gap: 1.5rem;
+    }
+}
+
+@media only screen and (min-width: 769px) {
+    .guestBookingsSection {
+        padding: 10px 40px 70px;
+    }
+    .guestBookingsHeading {
+        align-self: center;
+    }
+    .guestBookings {
+        padding: 20px 40px;
+    }
+    .bookingsContainer{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        place-self: center;
+    }
+    .bookingCard {
+        width: 350px;
+    }
+}
+
+@media only screen and (min-width: 1201px) {
+    .guestBookingsSection {
+        padding: 10px 80px 70px;
+    }
+    .bookingCard {
+        width: 500px;
+    }
+}
+
+@media only screen and (min-width: 1640px) {
+    
 }

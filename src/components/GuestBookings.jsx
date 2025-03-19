@@ -62,101 +62,105 @@ export default function GuestBookings({id}) {
     };
 
     return (
-            <section className={styles.guestBookings}>
+            <section className={styles.guestBookingsSection}>
                 <h3 className={styles.guestBookingsHeading}>Bookings</h3>
-                {guestBookings.map(({ booking_id, check_in_date, check_out_date, property_name, host, images }, i) => (
-                    <div className={styles.bookingCard} key={i}>
-                        <p>You booked a stay at <span className={styles.mainInfo}>{property_name}</span></p>
-                        <img src={images[0]} alt={property_name} className={styles.itemImg}/>
-                        
-                        <div className={styles.datesContainer}>
-                            <p className={styles.mainInfoCategory}>Check-in date:</p>
-                            <p className={styles.mainInfo}>{formatDate(check_in_date)}</p>
-                        </div>
-                        
-                        <div className={styles.datesContainer}>
-                            <p className={styles.mainInfoCategory}>Check-out date:</p>
-                            <p className={styles.mainInfo}>{formatDate(check_out_date)}</p>
-                        </div>
-                        
-                        <p>Hosted by <span className={styles.mainInfo}>{host}</span></p>
-                        <div className={styles.bookingBtnsContainer}>
-                            <button
-                                onClick={() => editBookingBtnClick({booking_id, check_in_date, check_out_date})}
-                                className={styles.editBookingBtn}
-                            >
-                                Edit booking
-                            </button>
-                            <button
-                                onClick={() => handleDeleteBookingBtnClick(booking_id)}
-                                className={styles.deleteBookingBtn}
-                            >
-                                Delete booking
-                            </button>
-                        </div>
-                        
-                        {isModalOpen && editingBookingId === booking_id && updatedBooking && (
-                            <div className={styles.editBookingModal}>
-                                <div className={styles.editBookingSection}>
-                                    <div className={styles.modalTop}>
-                                        <h4 className={styles.editBookingHeading}>Edit your booking:</h4>
-                                        <span className={styles.closeModalIcon} onClick={handleCloseModal}>&times;</span>
-                                    </div>
-                                    
-                                    <form 
-                                        className={styles.editBookingForm} 
-                                        onSubmit={handleSaveChangesBtn}
-                                    > 
-                                        <label htmlFor="check_in_date" className={styles.editBookingFormLabel}>
-                                            Check-in date:
-                                            <br />
-                                            <input 
-                                                type="date" 
-                                                id="check_in_date"
-                                                value={updatedBooking.check_in_date} 
-                                                name="check_in_date" 
-                                                className={styles.editBookingFormInput}
-                                                onChange={(e) => setUpdatedBooking({
-                                                    ...updatedBooking,
-                                                    check_in_date: e.target.value
-                                                })}
-                                                required/>
-                                        </label>
-                                        <br />
-                    
-                                        <label htmlFor="check_out_date" className={styles.editBookingFormLabel}>
-                                            Check-out date:
-                                            <br />
-                                            <input 
-                                                type="date" 
-                                                id="check_out_date" 
-                                                value={updatedBooking.check_out_date} 
-                                                name="check_out_date" 
-                                                className={styles.editBookingFormInput}
-                                                onChange={(e) => setUpdatedBooking({
-                                                    ...updatedBooking,
-                                                    check_out_date: e.target.value
-                                                })}
-                                                required/>
-                                        </label>
-                                        <br />
+                <div className={styles.bookingsContainer}>
+                    {guestBookings.map(({ booking_id, check_in_date, check_out_date, property_name, host, images }, i) => (
+                        <div className={styles.bookingCard} key={i}>
+                            <p className={styles.message}>You booked a stay at <span className={styles.mainInfo}>{property_name}</span></p>
 
-                                        {successMessage && (
-                                            <p className={styles.successMessage}>Your booking is successfully updated!</p>
-                                        )}
-
-                                        <input 
-                                            type="submit" 
-                                            value="Save changes" 
-                                            className={styles.saveChangesBtn}
-                                        />
-                                    </form>
-                                </div> 
+                            <img src={images[0]} alt={property_name} className={styles.itemImg}/>
+                            
+                            <div className={styles.datesContainer}>
+                                <div className={styles.dateContainer}>
+                                    <p className={styles.mainInfoCategory}>Check-in date:</p>
+                                    <p className={styles.mainInfo}>{formatDate(check_in_date)}</p>
+                                </div>
+                                <div className={styles.dateContainer}>
+                                    <p className={styles.mainInfoCategory}>Check-out date:</p>
+                                    <p className={styles.mainInfo}>{formatDate(check_out_date)}</p>
+                                </div>
                             </div>
-                        )}
-                    </div>
-                ))
-                }  
+                            
+                            <p className={styles.hostInfo}>Hosted by <span className={styles.mainInfo}>{host}</span></p>
+                            <div className={styles.bookingBtnsContainer}>
+                                <button
+                                    onClick={() => editBookingBtnClick({booking_id, check_in_date, check_out_date})}
+                                    className={styles.editBookingBtn}
+                                >
+                                    Edit booking
+                                </button>
+                                <button
+                                    onClick={() => handleDeleteBookingBtnClick(booking_id)}
+                                    className={styles.deleteBookingBtn}
+                                >
+                                    Delete booking
+                                </button>
+                            </div>
+                            
+                            {isModalOpen && editingBookingId === booking_id && updatedBooking && (
+                                <div className={styles.editBookingModal}>
+                                    <div className={styles.editBookingSection}>
+                                        <div className={styles.modalTop}>
+                                            <h4 className={styles.editBookingHeading}>Edit your booking:</h4>
+                                            <span className={styles.closeModalIcon} onClick={handleCloseModal}>&times;</span>
+                                        </div>
+                                        
+                                        <form 
+                                            className={styles.editBookingForm} 
+                                            onSubmit={handleSaveChangesBtn}
+                                        > 
+                                            <label htmlFor="check_in_date" className={styles.editBookingFormLabel}>
+                                                Check-in date:
+                                                <br />
+                                                <input 
+                                                    type="date" 
+                                                    id="check_in_date"
+                                                    value={updatedBooking.check_in_date} 
+                                                    name="check_in_date" 
+                                                    className={styles.editBookingFormInput}
+                                                    onChange={(e) => setUpdatedBooking({
+                                                        ...updatedBooking,
+                                                        check_in_date: e.target.value
+                                                    })}
+                                                    required/>
+                                            </label>
+                                            <br />
+                        
+                                            <label htmlFor="check_out_date" className={styles.editBookingFormLabel}>
+                                                Check-out date:
+                                                <br />
+                                                <input 
+                                                    type="date" 
+                                                    id="check_out_date" 
+                                                    value={updatedBooking.check_out_date} 
+                                                    name="check_out_date" 
+                                                    className={styles.editBookingFormInput}
+                                                    onChange={(e) => setUpdatedBooking({
+                                                        ...updatedBooking,
+                                                        check_out_date: e.target.value
+                                                    })}
+                                                    required/>
+                                            </label>
+                                            <br />
+
+                                            {successMessage && (
+                                                <p className={styles.successMessage}>Your booking is successfully updated!</p>
+                                            )}
+
+                                            <input 
+                                                type="submit" 
+                                                value="Save changes" 
+                                                className={styles.saveChangesBtn}
+                                            />
+                                        </form>
+                                    </div> 
+                                </div>
+                            )}
+                        </div>
+                    ))} 
+                </div>
+ 
                 
             </section>
     )
