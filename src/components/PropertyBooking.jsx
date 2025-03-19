@@ -35,54 +35,56 @@ export default function PropertyBooking() {
 
     return (
             <main>
-                <h2 className={styles.propertyBookingHeading}>Enter your details:</h2>
-                <form className={styles.bookingForm} onSubmit={handleBookingPropertySubmit}>
-                    
-                    <label htmlFor="guestId" className={styles.bookingFormLabel}>
-                        Guest id:
-                        <br />
-                        <input 
-                            type="text" 
-                            id="guestId"
-                            value={guestId} 
-                            name="guest" 
-                            className={styles.bookingFormInput}
-                            readOnly
-                        />
-                    </label>
-                    
-                    <label htmlFor="check_in_date" className={styles.bookingFormLabel}>
-                        Check-in date:
-                        <br />
-                        <input 
-                            type="date" 
-                            id="check_in_date"
-                            value={checkInDate} 
-                            name="check_in_date" 
-                            className={styles.bookingFormInput}
-                            onChange={(e) => setCheckInDate(e.target.value)}
-                            required/>
-                    </label>
+                <div className={styles.bookingFormContainer}>
+                    <h2 className={styles.propertyBookingHeading}>Enter your details:</h2>
+                    <form className={styles.bookingForm} onSubmit={handleBookingPropertySubmit}>
+                        
+                        <label htmlFor="guestId" className={styles.bookingFormLabel}>
+                            Guest id:
+                            <br />
+                            <input 
+                                type="text" 
+                                id="guestId"
+                                value={guestId} 
+                                name="guest" 
+                                className={styles.bookingFormInput}
+                                readOnly
+                            />
+                        </label>
+                        
+                        <label htmlFor="check_in_date" className={styles.bookingFormLabel}>
+                            Check-in date:
+                            <br />
+                            <input 
+                                type="date" 
+                                id="check_in_date"
+                                value={checkInDate} 
+                                name="check_in_date" 
+                                className={styles.bookingFormInput}
+                                onChange={(e) => setCheckInDate(e.target.value)}
+                                required/>
+                        </label>
 
-                    <label htmlFor="check_out_date" className={styles.bookingFormLabel}>
-                        Check-out date:
-                        <br />
+                        <label htmlFor="check_out_date" className={styles.bookingFormLabel}>
+                            Check-out date:
+                            <br />
+                            <input 
+                                type="date" 
+                                id="check_out_date" 
+                                value={checkOutDate} 
+                                name="check_out_date" 
+                                className={styles.bookingFormInput}
+                                onChange={(e) => setCheckOutDate(e.target.value)}
+                                required/>
+                        </label>
+                        
                         <input 
-                            type="date" 
-                            id="check_out_date" 
-                            value={checkOutDate} 
-                            name="check_out_date" 
-                            className={styles.bookingFormInput}
-                            onChange={(e) => setCheckOutDate(e.target.value)}
-                            required/>
-                    </label>
-                    
-                    <input 
-                        type="submit" 
-                        value="Book" 
-                        className={styles.bookingBtn}
-                    />
-                </form>
+                            type="submit" 
+                            value="Book" 
+                            className={styles.bookingBtn}
+                        />
+                    </form>
+                </div>
             </main>
     )
 }

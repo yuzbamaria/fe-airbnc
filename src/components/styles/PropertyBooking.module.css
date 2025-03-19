@@ -1,7 +1,7 @@
 .propertyBookingHeading {
     font-size: 1.2rem;
     font-weight: 600;
-    padding: 40px 20px 10px;
+    padding: 40px 40px 10px;
 }
 
 .bookingForm {
@@ -26,7 +26,9 @@
     height: 2.5rem;
     border: 1px solid black;;
     border-radius: 8px;
-    padding: 5px;
+    padding: 8px;
+    font-family: Montserrat, serif;
+    font-size: 0.9rem;
 }
 
 .bookingBtn {
@@ -48,4 +50,26 @@
     border: 1px solid #497ad6;
     background-color: white;
     color: #497ad6;
+}
+
+@media only screen and (min-width: 481px) {
+    .bookingFormContainer{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 50px;
+    }
+    .bookingForm {
+        align-items: center;
+        gap: 30px;
+    }
+    .bookingFormInput {
+        width: 375px;
+        height: 3rem;
+        font-size: 1rem;
+        padding: 10px;
+    }
+    .bookingBtn {
+        width: 200px;
+    }
 }
