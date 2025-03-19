@@ -39,7 +39,7 @@ export default function Header() {
                         </>
                     )}
                     <h1>
-                        <Link to={`/`} className={styles.logo}>AirbNC</Link>
+                        <Link to={`/`} className={styles.logo}>AirBNC</Link>
                     </h1>
                     <ul>
                         <li><Link to={`/users/${guestId}`} className={styles.modesLinks}>Guest</Link></li>

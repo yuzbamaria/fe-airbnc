@@ -46,7 +46,6 @@
     color: red;
 }
 
-
 .host_info {
     display: flex;
     justify-content: flex-start;
@@ -86,14 +85,15 @@
 
 .reserveBtn {
     display: inline-block;
-    padding: 1rem 3rem;
+    text-align: center;
+    width: 175px;
+    padding: 1rem 2rem;
     border-radius: 15px;
     border: none;
     background-color: #7b9bd6;
     font-size: 1.3rem;
     text-decoration: none;
     color: black;
-    font-family: Montserrat;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 
                 0 6px 20px rgba(0, 0, 0, 0.1);
 }
@@ -106,4 +106,49 @@
 
 .reserveBtn:active {
     color: red;
+}
+
+@media only screen and (min-width: 481px) {
+    .propertyInfoContainer {
+        margin: 0 30px;
+        padding: 20px 0;
+    }
+    .host_info {
+        margin: 0 30px;
+        padding: 20px 0;
+    }
+    .propertyReservationContainer {
+        margin: 0 30px;
+        padding: 20px 0;
+    }
+}
+
+@media only screen and (min-width: 769px) {
+    .propertyInfoContainer {
+        margin: 0 40px;
+        padding: 30px 0;
+    }
+    .host_info {
+        margin: 0 40px;
+        padding: 30px 0;
+    }
+    .propertyReservationContainer {
+        margin: 0 40px;
+        padding: 30px 0;
+    }
+}
+
+@media only screen and (min-width: 1201px) {
+    .propertyInfoContainer {
+        margin: 0 310px;
+        padding: 30px 0;
+    }
+    .host_info {
+        margin: 0 310px;
+        padding: 30px 0;
+    }
+    .propertyReservationContainer {
+        margin: 0 310px;
+        padding: 30px 0;
+    }
 }

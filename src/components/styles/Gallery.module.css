@@ -35,3 +35,17 @@
     position: absolute;
     right: 0;
 }
+
+@media only screen and (min-width: 769px) {
+    .gallery_container {
+        padding: 30px 50px;
+        margin: 0 60px;
+    }
+}
+
+@media only screen and (min-width: 1201px) {
+    .gallery_container {
+        padding: 30px 50px;
+        margin: 0 310px;
+    }
+}
