@@ -29,7 +29,7 @@ export default function GuestProfile() {
         <>
             <main>
                 <section className={styles.guestProfile}>
-                    <h3 className={styles.guestProfileHeading}>Guest Profile</h3>
+                    <h3 className={styles.guestProfileHeading}>Personal Information</h3>
                     <div className={styles.guestProfileContainer}>
                         <div className={styles.guestTopContainerInfo}>
                             <div className={styles.guestAvatarContainer}>

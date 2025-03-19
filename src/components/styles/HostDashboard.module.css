@@ -14,7 +14,12 @@
 .dashboardSubheading {
     font-size: 1rem;
     font-weight: 500;
-    /* margin: 20px 0; */
+}
+
+.ownedPropertiesContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .hostBookedPropertiesCard {
@@ -29,6 +34,39 @@
 .itemImg {
     border-radius: 15px;
     width: 200px;
-    height: auto;
+    height: 180px;
     object-fit: cover; 
+}
+
+@media only screen and (min-width: 481px) {
+    .dashboard {
+        padding: 20px 30px;
+    }
+    .ownedPropertiesContainer {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    .hostBookedPropertiesCard {
+        align-items: center;
+    }
+}
+
+@media only screen and (min-width: 769px) {
+    .dashboard {
+        padding: 30px 40px;
+        align-items: center;
+    }
+    .ownedPropertiesContainer {
+        justify-items: center;
+        width: 720px;
+    }
+    .hostBookedPropertiesCard {
+        width: 350px;
+    }
+}
+
+@media only screen and (min-width: 1201px) {
+    .dashboard {
+        padding: 30px 80px;
+    }
 }
