@@ -49,7 +49,7 @@
     -webkit-appearance: none; 
     appearance: none;
     width: 100%;
-    height: 3px; 
+    height: 2px; 
     background-color: black; 
 }
 
@@ -70,9 +70,47 @@
     font-family: "Montserrat", serif;
     font-size: 1rem;
     background-color: white;
-    border: 1px solid black;
+    border: 1px solid #497ad6;
     border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 
+                0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
+.filtersSubmitBtn:hover {
+    cursor: pointer;
+    color: #497ad6;
+}
 
+.filtersSubmitBtn:active {
+    color: red;
+}
 
+@media only screen and (min-width: 481px) {
+    .filtersContainer {
+        padding: 20px 30px;
+    }
+    .slider {
+        width: 60%;
+    }
+    .filtersSubmitBtn {
+        width: 150px;
+    }
+}
+
+@media only screen and (min-width: 769px) {
+    .filtersContainer {
+        padding: 30px 40px;
+    }
+    .slider {
+        width: 50%;
+    }
+}
+
+@media only screen and (min-width: 1201px) {
+    .filtersContainer {
+        padding: 30px 80px;
+    }
+    .slider {
+        width: 25%;
+    }
+}

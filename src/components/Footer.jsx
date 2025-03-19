@@ -8,7 +8,7 @@ export default function Footer() {
             <footer>
                 <p>@ 2025 AirbNC by Maria Yuzba</p>
                 <a 
-                    href="https://github.com/yuzbamaria" 
+                    href="https://github.com/yuzbamaria/fe-airbnc" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     style={{ color: '#007bff', textDecoration: 'none' }}

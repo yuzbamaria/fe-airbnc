@@ -1,7 +1,15 @@
 .gitHubIcon {
     cursor: pointer;
     border: none; 
-    font-size: 1.6rem; 
+    font-size: 2rem; 
     color: black;
-    
-  }
+}
+
+.gitHubIcon:hover {
+  cursor: pointer;
+  color: #497ad6;
+}
+
+.gitHubIcon:acrive {
+  color: red;
+}

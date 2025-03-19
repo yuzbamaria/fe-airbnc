@@ -28,3 +28,24 @@ footer {
   font-size: 0.9rem;
   background-image: linear-gradient(to right top, #f8f8f8, #eeeff4, #e3e6f0, #d6ddec, #c8d5e8);
 }
+
+@media only screen and (min-width: 481px) {
+  footer {
+    justify-content: center;
+    gap: 50px;
+    padding: 30px;
+  }
+}
+
+@media only screen and (min-width: 769px) {
+  footer {
+    gap: 70px;
+    padding: 30px 40px;
+  }
+}
+
+@media only screen and (min-width: 1201px) {
+  footer {
+    padding: 30px 80px;
+  }
+}
