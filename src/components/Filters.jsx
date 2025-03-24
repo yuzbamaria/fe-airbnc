@@ -1,24 +1,23 @@
 import styles from "./styles/Filters.module.css";
 
 export default function Filters({
-    minPrice,
-    maxPrice,
-    isMostPopularChecked,
-    isLeastPopularChecked,
-    isHighestCostChecked,
-    isLowestCostChecked,
-    handleSortOption,
-    handleMinPriceSliderChange,
-    handleMaxPriceSliderChange,
-    handleSubmit,
-    setIsFiltersModalOpen,
-    setIsFiltersOpen
-}) {
+        minPrice,
+        maxPrice,
+        isMostPopularChecked,
+        isLeastPopularChecked,
+        isHighestCostChecked,
+        isLowestCostChecked,
+        handleSortOption,
+        handleMinPriceSliderChange,
+        handleMaxPriceSliderChange,
+        handleSubmit,
+        setIsFiltersModalOpen
+    }) {
     
     function handleCloseFiltersModal() {
-        setIsFiltersModalOpen(true);
-        setIsFiltersOpen(false);
-    }
+        setIsFiltersModalOpen(false);
+    };
+
     return (
         <>
             <div className={styles.openFiltersModal}>

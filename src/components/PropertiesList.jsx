@@ -9,7 +9,6 @@ import PropertyTypes from "./PropertyTypes";
 
 export default function PropertiesList() {
     const [propertiesList, setPropertiesList] = useState([]);
-    const [isFiltersOpen, setIsFiltersOpen] = useState(false);
     const [searchParams, setSearchParams] = useSearchParams();
      const [isFiltersModalOpen, setIsFiltersModalOpen] = useState(false);
     const navigate = useNavigate();
@@ -88,7 +87,7 @@ export default function PropertiesList() {
     };
 
     function handleFiltersBtnClick() {
-        setIsFiltersOpen(!isFiltersOpen);
+        setIsFiltersModalOpen(true);
     };
 
     const uniquePropertyTypes = [];
@@ -111,7 +110,7 @@ export default function PropertiesList() {
                             <FontAwesomeIcon icon={faSliders} className={styles.bars}/>
                             Filters
                         </button>
-                        {isFiltersOpen && (
+                        {isFiltersModalOpen && (
                             <Filters 
                             minPrice={minPrice}
                             maxPrice={maxPrice}
@@ -124,7 +123,6 @@ export default function PropertiesList() {
                             handleMaxPriceSliderChange={handleMaxPriceSliderChange}
                             handleSubmit={handleSubmit}
                             setIsFiltersModalOpen={setIsFiltersModalOpen}
-                            setIsFiltersOpen={setIsFiltersOpen}
                             />
                         )}
                     </div>
