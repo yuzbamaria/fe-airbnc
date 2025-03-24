@@ -40,31 +40,49 @@
     font-weight: 500;
 }
 
+.filtersContainer {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    padding: 20px;
+}
+
+.leftSideFiltersContainer {
+    display: flex;
+    flex-direction: column;
+}
+
 .filtersIcon {
     display: flex;
     align-items: center;
-    margin-left: 20px;
-    padding: 10px 20px;
+    padding: 12px 20px;
     border: 1px solid grey;
     border-radius: 12px;
     background-color: white;
-    font-size: 1rem; 
     font-weight: lighter;
-    cursor: pointer;
+    height: 2.5rem;
+    font-size: 0.9rem;
 }
 
 .bars {
     padding-right: 10px;
-    font-size: 1.2rem; 
-    font-weight: lighter;
+    font-size: 1.1rem; 
 }
 
 .filtersIcon:hover {
+    cursor: pointer;
     color: #497ad6;
 }
 
 .filtersIcon:active {
     color: red;
+}
+
+.propertyTypesContainer {
+    display: flex;
+    gap: 20px;
 }
 
 @media only screen and (min-width: 481px) {
@@ -77,8 +95,8 @@
     .itemImg {
         height: 200px;
     }
-    .filtersIcon {
-        margin-left: 30px;
+    .filtersContainer {
+        padding: 20px 30px
     }
 }
 
@@ -91,8 +109,9 @@
     .itemImg {
         height: 250px;
     }
-    .filtersIcon {
-        margin-left: 40px;
+    .filtersContainer {
+        padding: 30px 40px;
+        justify-content: space-between; 
     }
 }
 
@@ -101,8 +120,8 @@
         grid-template-columns: repeat(4, 1fr);
         padding: 30px 80px;
     }
-    .filtersIcon {
-        margin-left: 80px;
+    .filtersContainer {
+        padding: 30px 80px;
     }
 }
 

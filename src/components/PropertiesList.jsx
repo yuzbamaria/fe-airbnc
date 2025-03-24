@@ -5,18 +5,20 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import Filters from "./Filters";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSliders } from '@fortawesome/free-solid-svg-icons';
+import PropertyTypes from "./PropertyTypes";
 
 export default function PropertiesList() {
     const [propertiesList, setPropertiesList] = useState([]);
     const [isFiltersOpen, setIsFiltersOpen] = useState(false);
     const [searchParams, setSearchParams] = useSearchParams();
+     const [isFiltersModalOpen, setIsFiltersModalOpen] = useState(false);
     const navigate = useNavigate();
 
     const sortByQuery = searchParams.get("sort");
     const orderQuery = searchParams.get("order"); 
     
     const [minPrice, setMinPrice] = useState(20);
-    const [maxPrice, setMaxPrice] = useState(20);
+    const [maxPrice, setMaxPrice] = useState(500);
 
     const isMostPopularChecked = sortByQuery === "popularity" && orderQuery === "desc";
     const isLeastPopularChecked = sortByQuery === "popularity" && orderQuery === "asc";
@@ -38,7 +40,18 @@ export default function PropertiesList() {
 
     useEffect(() => {
         fetchProperties(); // Fetch all properties on initial load
-    }, []);
+
+        const minPriceFromQuery = searchParams.get("minprice");
+        const maxPriceFromQuery = searchParams.get("maxprice");
+
+        if (minPriceFromQuery) {
+            setMinPrice(Number(minPriceFromQuery));
+        };
+        if (maxPriceFromQuery) {
+            setMaxPrice(Number(maxPriceFromQuery));
+        };
+
+    }, [searchParams]);
       
     function handleSortOption(sort, order) {
         const newParams = new URLSearchParams(searchParams);
@@ -78,37 +91,52 @@ export default function PropertiesList() {
         setIsFiltersOpen(!isFiltersOpen);
     };
 
+    const uniquePropertyTypes = [];
+    propertiesList.forEach(({ property_type }) => {
+        if (!uniquePropertyTypes.includes(property_type)) {
+            uniquePropertyTypes.push(property_type)
+        }
+    });
     
     return (
         <>
             <main>
+                <section className={styles.filtersContainer}>
+                    <div className={styles.leftSideFiltersContainer}>
+                        <button
+                            onClick={handleFiltersBtnClick} 
+                            className={styles.filtersIcon} 
+                            aria-label="Toggle filters"
+                        >
+                            <FontAwesomeIcon icon={faSliders} className={styles.bars}/>
+                            Filters
+                        </button>
+                        {isFiltersOpen && (
+                            <Filters 
+                            minPrice={minPrice}
+                            maxPrice={maxPrice}
+                            isMostPopularChecked={isMostPopularChecked}
+                            isLeastPopularChecked={isLeastPopularChecked}
+                            isHighestCostChecked={isHighestCostChecked}
+                            isLowestCostChecked={isLowestCostChecked}
+                            handleSortOption={handleSortOption}
+                            handleMinPriceSliderChange={handleMinPriceSliderChange}
+                            handleMaxPriceSliderChange={handleMaxPriceSliderChange}
+                            handleSubmit={handleSubmit}
+                            setIsFiltersModalOpen={setIsFiltersModalOpen}
+                            setIsFiltersOpen={setIsFiltersOpen}
+                            />
+                        )}
+                    </div>
+                    
+                    <div className={styles.propertyTypesContainer}>
+                        <PropertyTypes propertyType={uniquePropertyTypes} />
+                    </div>
+                </section>  
+
                 <section>
-                    
-                    <button
-                        onClick={handleFiltersBtnClick} 
-                        className={styles.filtersIcon} 
-                        aria-label="Toggle filters"
-                    >
-                        <FontAwesomeIcon icon={faSliders} className={styles.bars}/>
-                        Filters
-                    </button>
-                    {isFiltersOpen && (
-                        <Filters 
-                        minPrice={minPrice}
-                        maxPrice={maxPrice}
-                        isMostPopularChecked={isMostPopularChecked}
-                        isLeastPopularChecked={isLeastPopularChecked}
-                        isHighestCostChecked={isHighestCostChecked}
-                        isLowestCostChecked={isLowestCostChecked}
-                        handleSortOption={handleSortOption}
-                        handleMinPriceSliderChange={handleMinPriceSliderChange}
-                        handleMaxPriceSliderChange={handleMaxPriceSliderChange}
-                        handleSubmit={handleSubmit}
-                        />
-                    )}
-                    
                     <div className={styles.listContainer}>
-                        {propertiesList.map(({ images, property_name, location, price_per_night, property_id }) => (
+                        {propertiesList.map(({ images, property_name, location, cost_per_night, property_id }) => (
                             <div 
                                 key={property_id} 
                                 className={styles.itemContainer}
@@ -121,7 +149,7 @@ export default function PropertiesList() {
                                 />
                                 <h3 className={styles.propertyName}>{property_name}</h3>
                                 <p className={styles.propertyLocation}>{location}</p>
-                                <p className={styles.propertyPrice}>£{price_per_night} night</p>
+                                <p className={styles.propertyPrice}>£{cost_per_night} night</p>
                             </div>
                         ))}
                     </div>

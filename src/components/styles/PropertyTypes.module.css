@@ -1,0 +1,22 @@
+.propertyTypeBtn {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px 20px;
+    border: none;
+    background-color: white;
+    font-size: 0.9rem;
+}
+
+.propertyTypeIcon {
+    font-size: 1.1rem; 
+}
+
+.propertyTypeBtn:hover {
+    cursor: pointer;
+    color: #497ad6;
+}
+
+.propertyTypeBtn:active {
+    color: red;
+}
