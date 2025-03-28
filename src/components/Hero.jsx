@@ -8,7 +8,7 @@ export default function Hero() {
                 <div className={styles.container}>
                     <img src={heroBanner} alt="holiday_property" className={styles.heroImg} width="400px"/>
                     <div className={styles.bannerText}>
-                        <h2>Discover Your Dream Stay</h2>
+                        <h2>DISCOVER YOUR DREAM STAY</h2>
                     </div>
                 </div>
             </section>

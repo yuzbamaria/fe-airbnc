@@ -3,7 +3,7 @@
     width: 100vw;
     height: 40vh;
     overflow: hidden;
-    /* background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)); */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.453), rgba(0, 0, 0, 0.148));
 }
 
 .container::after {
@@ -34,9 +34,10 @@
 
 h2 {
     font-size: 2em;
-    color: black;
+    font-family: "Oswald", sans-serif;
+    color: white;
     font-optical-sizing: auto;
-    font-weight: 500;
+    font-weight:bold;
     font-style: normal;
     padding: 1rem;
 }
@@ -49,6 +50,7 @@ h2 {
     }
     h2 {
         padding: 0;
+        font-size: 2.3rem;
     }
 }
 
@@ -56,11 +58,17 @@ h2 {
     .bannerText {
         left: 40px;
     }
+    h2 {
+        font-size: 2.7rem;
+    }
 }
 
 @media only screen and (min-width: 1201px) {
     .bannerText {
         left: 80px;
+    }
+    h2 {
+        font-size: 3rem;
     }
 }
 
