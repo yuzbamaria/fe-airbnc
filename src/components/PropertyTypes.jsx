@@ -1,6 +1,6 @@
 import styles from "./styles/PropertyTypes.module.css";
 
-export default function PropertyTypes({ propertyType }) {
+export default function PropertyTypes({ propertyType, handlePropertyTypeChange }) {
     return (
         <>  
             {propertyType.map(type => {
@@ -9,6 +9,7 @@ export default function PropertyTypes({ propertyType }) {
                     <button 
                         key={type} 
                         className={styles.propertyTypeBtn}
+                        onClick={handlePropertyTypeChange}
                     >
                         <img 
                             src={imagePath} 
@@ -18,7 +19,6 @@ export default function PropertyTypes({ propertyType }) {
                         {type}
                     </button>
                 )
-                
             })}
         </>
     ) 

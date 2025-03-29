@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
 import axios from "axios";
 import styles from "./styles/PropertiesList.module.css";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -10,7 +10,8 @@ import PropertyTypes from "./PropertyTypes";
 export default function PropertiesList() {
     const [propertiesList, setPropertiesList] = useState([]);
     const [searchParams, setSearchParams] = useSearchParams();
-     const [isFiltersModalOpen, setIsFiltersModalOpen] = useState(false);
+    const [isFiltersModalOpen, setIsFiltersModalOpen] = useState(false);
+    const [selectedPropertyType, setSelectedPropertyType] = useState('');
     const navigate = useNavigate();
 
     const sortByQuery = searchParams.get("sort");
@@ -90,11 +91,20 @@ export default function PropertiesList() {
         setIsFiltersModalOpen(true);
     };
 
+    function handlePropertyTypeChange(e) {
+        const type = e.currentTarget.innerText;
+        setSelectedPropertyType((prevType) => (prevType === type ? '' : type));
+    };
+    
+    const displayedItems = selectedPropertyType 
+    ? propertiesList.filter((item) => item.property_type === selectedPropertyType)
+    : propertiesList;
+
     const uniquePropertyTypes = [];
     propertiesList.forEach(({ property_type }) => {
         if (!uniquePropertyTypes.includes(property_type)) {
             uniquePropertyTypes.push(property_type)
-        }
+        };
     });
     
     return (
@@ -128,13 +138,13 @@ export default function PropertiesList() {
                     </div>
                     
                     <div className={styles.propertyTypesContainer}>
-                        <PropertyTypes propertyType={uniquePropertyTypes} />
+                        <PropertyTypes propertyType={uniquePropertyTypes} handlePropertyTypeChange={handlePropertyTypeChange}/>
                     </div>
                 </section>  
 
                 <section>
                     <div className={styles.listContainer}>
-                        {propertiesList.map(({ images, property_name, location, cost_per_night, property_id }) => (
+                        {displayedItems.map(({ images, property_name, location, cost_per_night, property_id }) => (
                             <div 
                                 key={property_id} 
                                 className={styles.itemContainer}
