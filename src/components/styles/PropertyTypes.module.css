@@ -21,3 +21,8 @@
 .propertyTypeBtn:active {
     color: red;
 }
+
+.activePropertyType {
+    border-bottom: 1px solid black;
+    font-weight: bold;
+}

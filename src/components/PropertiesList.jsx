@@ -138,7 +138,10 @@ export default function PropertiesList() {
                     </div>
                     
                     <div className={styles.propertyTypesContainer}>
-                        <PropertyTypes propertyType={uniquePropertyTypes} handlePropertyTypeChange={handlePropertyTypeChange}/>
+                        <PropertyTypes propertyType={uniquePropertyTypes} 
+                        handlePropertyTypeChange={handlePropertyTypeChange} 
+                        selectedPropertyType={selectedPropertyType}
+                        />
                     </div>
                 </section>  
 
