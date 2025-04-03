@@ -148,6 +148,10 @@
         padding: 30px 80px;
     }
     .slider {
-        width: 25%;
+        width: 55%;
+    }
+    .openFiltersSection {
+        width: 600px;
+        padding: 60px 40px;
     }
 }
