@@ -122,11 +122,15 @@
     }
     .filtersContainer {
         padding: 30px 80px;
+        justify-content: center; 
     }
 }
 
 @media only screen and (min-width: 1640px) {
     .listContainer {
         grid-template-columns: repeat(5, 1fr);
+    }
+    .filtersContainer {
+        gap: 60px;
     }
 }
