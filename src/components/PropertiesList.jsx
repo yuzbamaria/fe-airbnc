@@ -50,8 +50,7 @@ export default function PropertiesList() {
         if (maxPriceFromQuery) {
             setMaxPrice(Number(maxPriceFromQuery));
         };
-
-    }, [searchParams]);
+    }, []);
       
     function handleSortOption(sort, order) {
         const newParams = new URLSearchParams(searchParams);
@@ -81,6 +80,8 @@ export default function PropertiesList() {
         newParams.set("maxprice", newMaxPrice);
         setSearchParams(newParams);
     };
+
+    console.log(searchParams)
 
     function handleSubmit(e) {
         e.preventDefault();
