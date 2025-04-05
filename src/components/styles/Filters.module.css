@@ -101,11 +101,11 @@
 }
 
 .filtersSubmitBtn {
-    padding: 15px 0;
-    width: 100%;
-    margin-top: 40px;
+    padding: 15px;
+    width: auto;
     font-family: "Montserrat", serif;
     font-size: 1rem;
+    font-weight: 500;
     background-color: white;
     border: 1px solid #497ad6;
     border-radius: 15px;
@@ -121,6 +121,19 @@
 .filtersSubmitBtn:active {
     color: red;
 }
+.controls {
+    width: 100%;
+    display: flex;
+    gap: 60px;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+
+.clearFiltersBtn {
+    background-color: white;
+    border: none;
+    font-size: 1.1rem;
+}
 
 @media only screen and (min-width: 481px) {
     .filtersContainer {
@@ -129,9 +142,9 @@
     .slider {
         width: 60%;
     }
-    .filtersSubmitBtn {
+    /* .filtersSubmitBtn {
         width: 150px;
-    }
+    } */
 }
 
 @media only screen and (min-width: 769px) {

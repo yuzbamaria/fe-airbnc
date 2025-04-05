@@ -107,6 +107,12 @@ export default function PropertiesList() {
             uniquePropertyTypes.push(property_type)
         };
     });
+
+    function handleClearFilters() {
+        setSearchParams('');
+        setMinPrice(20);
+        setMaxPrice(500);
+    };
     
     return (
         <>
@@ -134,6 +140,7 @@ export default function PropertiesList() {
                             handleMaxPriceSliderChange={handleMaxPriceSliderChange}
                             handleSubmit={handleSubmit}
                             setIsFiltersModalOpen={setIsFiltersModalOpen}
+                            handleClearFilters={handleClearFilters}
                             />
                         )}
                     </div>

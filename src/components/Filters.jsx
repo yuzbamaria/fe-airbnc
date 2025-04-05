@@ -11,7 +11,8 @@ export default function Filters({
         handleMinPriceSliderChange,
         handleMaxPriceSliderChange,
         handleSubmit,
-        setIsFiltersModalOpen
+        setIsFiltersModalOpen, 
+        handleClearFilters
     }) {
     
     function handleCloseFiltersModal() {
@@ -93,11 +94,20 @@ export default function Filters({
                                 className={styles.slider}
                                 />
                         </div>
-                        <input 
-                            type="submit" 
-                            value="View results" 
-                            className={styles.filtersSubmitBtn}
-                        />
+                        <div className={styles.controls}>
+                            <button
+                                className={styles.clearFiltersBtn}
+                                onClick={handleClearFilters}
+                            >
+                                Clear all
+                            </button>
+                            <input 
+                                type="submit" 
+                                value="View results" 
+                                className={styles.filtersSubmitBtn}
+                            />
+                        </div>
+                        
                     </form>
                 </div>
             </div>
