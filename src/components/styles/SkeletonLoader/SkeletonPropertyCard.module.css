@@ -1,0 +1,25 @@
+.itemContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: flex-start;
+}
+
+.itemImg {
+    border-radius: 15px;
+    width: 100%;
+    height: 275px;
+    object-fit: cover; 
+}
+
+@media only screen and (min-width: 481px) {
+    .itemImg {
+        height: 200px;
+    }
+}
+
+@media only screen and (min-width: 481px) {
+    .itemImg {
+        height: 250px;
+    }
+}

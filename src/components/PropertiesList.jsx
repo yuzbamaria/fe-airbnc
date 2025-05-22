@@ -6,12 +6,15 @@ import Filters from "./Filters";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSliders } from '@fortawesome/free-solid-svg-icons';
 import PropertyTypes from "./PropertyTypes";
+import SkeletonPropertyCard from "./SkeletonLoader/SkeletonPropertyCard";
+import SkeletonPropertyTypes from "./SkeletonLoader/SkeletonPropertyTypes";
 
 export default function PropertiesList() {
     const [propertiesList, setPropertiesList] = useState([]);
     const [searchParams, setSearchParams] = useSearchParams();
     const [isFiltersModalOpen, setIsFiltersModalOpen] = useState(false);
     const [selectedPropertyType, setSelectedPropertyType] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
 
     const sortByQuery = searchParams.get("sort");
@@ -26,12 +29,14 @@ export default function PropertiesList() {
     const isLowestCostChecked = sortByQuery === "cost_per_night" && orderQuery === "asc";
 
     function fetchProperties() {
+        // setIsLoading(true);
         axios
             .get("https://be-airbnc-zw86.onrender.com/api/properties", {
             params: Object.fromEntries(searchParams.entries()),
           })
           .then((response) => {
             setPropertiesList(response.data.properties);
+            setIsLoading(false);
           })
           .catch((error) => {
             console.error(error);
@@ -81,8 +86,6 @@ export default function PropertiesList() {
         setSearchParams(newParams);
     };
 
-    console.log(searchParams)
-
     function handleSubmit(e) {
         e.preventDefault();
         fetchProperties();
@@ -112,7 +115,7 @@ export default function PropertiesList() {
         setSearchParams('');
         setMinPrice(20);
         setMaxPrice(500);
-    };
+    }; 
     
     return (
         <>
@@ -146,16 +149,22 @@ export default function PropertiesList() {
                     </div>
                     
                     <div className={styles.propertyTypesContainer}>
-                        <PropertyTypes propertyType={uniquePropertyTypes} 
+                        {isLoading 
+                        ? Array.from({ length: 9 }).map((_, i) => <SkeletonPropertyTypes key={i} />)
+                        : <PropertyTypes 
+                        propertyTypes={uniquePropertyTypes} 
                         handlePropertyTypeChange={handlePropertyTypeChange} 
                         selectedPropertyType={selectedPropertyType}
                         />
+                        }
                     </div>
                 </section>  
 
                 <section>
                     <div className={styles.listContainer}>
-                        {displayedItems.map(({ images, property_name, location, cost_per_night, property_id }) => (
+                        {isLoading 
+                        ? Array.from({ length: 12 }).map((_, i) => <SkeletonPropertyCard key={i}/>)
+                        : displayedItems.map(({ images, property_name, location, cost_per_night, property_id }) => (
                             <div 
                                 key={property_id} 
                                 className={styles.itemContainer}
