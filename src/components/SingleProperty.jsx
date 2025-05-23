@@ -5,6 +5,8 @@ import styles from "./styles/SingleProperty.module.css";
 import Gallery from "./Gallery";
 import { Link } from "react-router-dom";
 import FavouriteProperty from "./FavouriteProperty";
+import SkeletonSingleProperty from "./SkeletonLoader/SkeletonSingleProperty";
+import "./styles/SkeletonLoader/skeleton.css";
 
 export default function SingleProperty() {
     const { id } = useParams();
@@ -19,11 +21,13 @@ export default function SingleProperty() {
         favourite_count: "",
         images: []
     });
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         axios.get(`https://be-airbnc-zw86.onrender.com/api/properties/${id}`)
             .then((response) => {
                 setProperty(response.data.property);
+                setIsLoading(false);
         })
             .catch((error) => {
             console.error(error);
@@ -33,25 +37,35 @@ export default function SingleProperty() {
     const images = property.images;
     return (
             <main>
-                <section className={styles.propertySection}>
-                    <div className={styles.photoGallery}>
-                        <Gallery images={images}/>
-                    </div>
+                {isLoading 
+                ? <SkeletonSingleProperty /> 
+                : <section className={styles.propertySection}>
+                    <Gallery images={images}/> 
+                    
+                    {/* PROPERTY INFO */}
                     <div className={styles.propertyInfoContainer}>
                         <div className={styles.topContainerInfo}>
                             <h2 className={styles.singlePropertyName}>{property.property_name}</h2>
                             <FavouriteProperty />
                         </div>
-                        <p className={styles.singlePropertyDescription}>{property.description}</p>
-                        <p className={styles.singlePropertyLocation}>Located in {property.location}</p>
+                        <p className={styles.singlePropertyDescription}>
+                            {property.description}
+                        </p>
+                        <p className={styles.singlePropertyLocation}>
+                            {`Located in ${property.location}`}
+                        </p>
                         <Link 
                             to={`/property/${id}/reviews`} 
                             className={styles.reviewsLink}
                         >
                             Reviews
                         </Link>
-                        <p><span style={{ fontWeight: 'bold'}}>£{property.price_per_night}</span> per night</p>
+                        <p>
+                            <span style={{ fontWeight: 'bold'}}> £{property.price_per_night} per night</span>
+                        </p>
                     </div>
+
+                    {/* HOST INFO */}
                     <div className={styles.host_info}>
                         <div className={styles.avatar_container}>
                             <img 
@@ -62,6 +76,8 @@ export default function SingleProperty() {
                         </div>
                         <p className={styles.hostFullName}>Hosted by {property.host}</p>
                     </div>
+
+                    {/* RESERVE BUTTON */}
                     <div className={styles.propertyReservationContainer}>
                         
                         <Link 
@@ -72,6 +88,7 @@ export default function SingleProperty() {
                         </Link>
                     </div>
                 </section>
+                }
             </main>
     )
 }

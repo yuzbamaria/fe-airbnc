@@ -2,6 +2,37 @@
     width: 100%;
     margin-bottom: 40px;
 }
+.gallery_container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.galleryImg {
+    flex: 1;
+    text-align: center;
+}
+
+.left_btn,
+.right_btn {
+    cursor: pointer;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    user-select: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+}
+
+.left_btn {
+    position: absolute;
+    left: 0;
+}
+
+.right_btn {
+    position: absolute;
+    right: 0;
+}
 
 .propertyInfoContainer {
     display: flex;
@@ -11,42 +42,18 @@
     padding-bottom: 15px;
     border-bottom: 2px solid rgb(227, 227, 227);
 }
-
 .topContainerInfo {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-
-.singlePropertyName {
-    font-size: 1.2rem;
-    color: black;
-    padding: 0;
-}
-
 .singlePropertyDescription {
     font-size: 1rem;
-}    
-
+}
 .singlePropertyLocation {
     font-size: 0.8rem;
     font-weight: bold;
 }
-
-.reviewsLink {
-    font-size: 0.8rem;
-    color: black;
-}
-
-.reviewsLink:active, .reviewsLink:hover {
-    color: #497ad6;
-    font-weight: bold;
-}
-
-.reviewsLink:active {
-    color: red;
-}
-
 .host_info {
     display: flex;
     justify-content: flex-start;
@@ -56,7 +63,6 @@
     padding: 10px 0;
     border-bottom: 2px solid rgb(227, 227, 227);
 }
-
 .avatar_container {
     width: 50px;
     height: 50px;
@@ -66,47 +72,10 @@
     align-items: center;
     justify-content: center;
 }
-
-.hostAvatar {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-}
-
-.hostFullName {
-    font-size: 1rem;
-    font-weight: 400;
-}
-
 .propertyReservationContainer {
     gap: 5rem;
     margin: 0 20px;
     padding: 20px 0;
-}
-
-.reserveBtn {
-    display: inline-block;
-    text-align: center;
-    width: 175px;
-    padding: 1rem 2rem;
-    border-radius: 15px;
-    border: none;
-    background-color: #7b9bd6;
-    font-size: 1.3rem;
-    text-decoration: none;
-    color: black;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 
-                0 6px 20px rgba(0, 0, 0, 0.1);
-}
-
-.reserveBtn:hover {
-    background-color: white;
-    color: #497ad6;
-    border: 2px solid #497ad6;
-}
-
-.reserveBtn:active {
-    color: red;
 }
 
 @media only screen and (min-width: 481px) {
@@ -125,6 +94,10 @@
 }
 
 @media only screen and (min-width: 769px) {
+    .gallery_container {
+        padding: 30px 50px;
+        margin: 0 60px;
+    }
     .propertyInfoContainer {
         margin: 0 40px;
         padding: 30px 0;
@@ -140,6 +113,10 @@
 }
 
 @media only screen and (min-width: 1201px) {
+    .gallery_container {
+        padding: 30px 50px;
+        margin: 0 310px;
+    }
     .propertyInfoContainer {
         margin: 0 310px;
         padding: 30px 0;

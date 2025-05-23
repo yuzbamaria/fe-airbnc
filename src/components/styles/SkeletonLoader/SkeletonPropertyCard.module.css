@@ -18,7 +18,7 @@
     }
 }
 
-@media only screen and (min-width: 481px) {
+@media only screen and (min-width: 769px) {
     .itemImg {
         height: 250px;
     }

@@ -29,7 +29,6 @@ export default function PropertiesList() {
     const isLowestCostChecked = sortByQuery === "cost_per_night" && orderQuery === "asc";
 
     function fetchProperties() {
-        // setIsLoading(true);
         axios
             .get("https://be-airbnc-zw86.onrender.com/api/properties", {
             params: Object.fromEntries(searchParams.entries()),
