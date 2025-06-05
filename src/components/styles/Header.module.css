@@ -107,6 +107,7 @@ h1 {
     color: black;
     font-size: 0.9rem;
     cursor: pointer;
+
 }
 
 .modesLinks:hover {
@@ -115,6 +116,21 @@ h1 {
 }
 
 .modesLinks:active {
+    color: red;
+}
+
+.authBtns {
+    background: none;
+    border: none;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.authBtns:hover {
+    color: #497ad6;
+}
+
+.authBtns:active {
     color: red;
 }
 
