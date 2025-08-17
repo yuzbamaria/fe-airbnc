@@ -1,3 +1,15 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 10vh;
+  padding: 30px 20px;
+  text-align: center;
+  font-size: 0.9rem;
+  background-image: linear-gradient(to right top, #f8f8f8, #eeeff4, #e3e6f0, #d6ddec, #c8d5e8);
+}
+
 .gitHubIcon {
     cursor: pointer;
     border: none; 
@@ -5,11 +17,37 @@
     color: black;
 }
 
+.gitHubLink {
+  color: #007bff;
+  text-decoration: none;
+}
+
 .gitHubIcon:hover {
   cursor: pointer;
   color: #497ad6;
 }
 
-.gitHubIcon:acrive {
+.gitHubIcon:active {
   color: red;
+}
+
+@media only screen and (min-width: 481px) {
+  .footer {
+    justify-content: center;
+    gap: 50px;
+    padding: 30px;
+  }
+}
+
+@media only screen and (min-width: 769px) {
+  .footer {
+    gap: 70px;
+    padding: 30px 40px;
+  }
+}
+
+@media only screen and (min-width: 1201px) {
+  .footer {
+    padding: 30px 80px;
+  }
 }

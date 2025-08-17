@@ -25,16 +25,16 @@ export default function SkeletonSingleProperty() {
                         <div className="skeleton-text-line" style={{ width: "50%", height: "1.5rem" }} />
                         <div className="skeleton-icon-placeholder" />
                     </div>
-                    <p className={styles.singlePropertyDescription}>
+                    <div className={styles.singlePropertyDescription}>
                         <div className="skeleton-text-line" style={{ width: "100%", height: "1rem" }} />
-                    </p>
-                    <p className={styles.singlePropertyLocation}>
+                    </div>
+                    <div className={styles.singlePropertyLocation}>
                         <div className="skeleton-text-line" style={{ width: "40%", height: "0.8rem" }} />
-                    </p>
+                    </div>
                     <div className="skeleton-link-placeholder" style={{ width: "100px", height: "0.8rem" }} />
-                    <p>
+                    <div>
                         <div className="skeleton-text-line" style={{ width: "40%", height: "1rem" }} />
-                    </p>
+                    </div>
                 </div>
 
                 {/* HOST INFO SKELETON */}

@@ -89,9 +89,9 @@
     text-align: center;
     width: 175px;
     padding: 1rem 2rem;
-    border-radius: 15px;
+    border-radius: 7px;
     border: none;
-    background-color: #7b9bd6;
+    background-color: var(--accent-color);
     font-size: 1.3rem;
     text-decoration: none;
     color: black;

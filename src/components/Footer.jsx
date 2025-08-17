@@ -5,13 +5,13 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 export default function Footer() {
     return (
         <>
-            <footer>
+            <footer className={styles.footer}>
                 <p>@ 2025 AirbNC by Maria Yuzba</p>
                 <a 
                     href="https://github.com/yuzbamaria/fe-airbnc" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    style={{ color: '#007bff', textDecoration: 'none' }}
+                    className={styles.gitHubLink}
                 >
                     <FontAwesomeIcon icon={faGithub} className={styles.gitHubIcon}/>
                 </a>

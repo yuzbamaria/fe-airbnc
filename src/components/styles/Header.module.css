@@ -60,9 +60,9 @@ h1 {
     color: red;
 }
 
-.hidden {
+/* .hidden {
     display: none;
-}
+} */
 
 .open {
     display: flex;
