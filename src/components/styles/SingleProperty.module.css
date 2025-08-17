@@ -89,24 +89,18 @@
     text-align: center;
     width: 175px;
     padding: 1rem 2rem;
-    border-radius: 7px;
+    /* border-radius: 7px; */
     border: none;
     background-color: var(--accent-color);
     font-size: 1.3rem;
     text-decoration: none;
     color: black;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 
-                0 6px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 
+                0 6px 10px rgba(0, 0, 0, 0.1);
 }
 
 .reserveBtn:hover {
-    background-color: white;
-    color: #497ad6;
-    border: 2px solid #497ad6;
-}
-
-.reserveBtn:active {
-    color: red;
+    background-color:  #cca01c;
 }
 
 @media only screen and (min-width: 481px) {

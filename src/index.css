@@ -2,6 +2,9 @@
   --accent-color: #ecb920;
 }
 
+body {
+  background-color: rgb(254, 250, 245);
+}
 
 * {
   box-sizing: border-box;
