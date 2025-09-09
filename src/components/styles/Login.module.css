@@ -19,7 +19,7 @@
     padding: 20px;
     background-color: #fefefe;
     border: 1px solid #888;
-    border-radius: 15px;
+    border-radius: 5px;
     width: 85%;
     max-width: 550px;
     height: auto;
@@ -31,6 +31,7 @@
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid rgb(227, 227, 227);
+    padding-bottom: 15px;
 }
 
 .loginModalHeading {
@@ -39,12 +40,22 @@
 
 .closeLoginModalIcon {
     font-size: 2rem; 
-    cursor: pointer;
+    padding: 2px 11px;
     background: none;
     border: none;
 }
 
+.closeLoginModalIcon:hover {
+    cursor: pointer;
+    background-color: rgba(6, 108, 241, 0.2);
+    padding: 2px 11px;
+    border-radius: 50%;
+    color: white;
+}
+
 .loginForm {
+    display: flex;
+    flex-direction: column;
     padding: 1.5rem 0;
 }
 
@@ -64,20 +75,28 @@
 }
 
 .loginBtn {
-    width: 100%;
+    align-self: center;
+    width: 150px;
     padding: 1rem 2rem;
-    font-size: 1.3rem;
+    font-size: 1rem;
     margin: 30px 0;
-    background-color: #7b9bd6;
-    border-radius: 15px;
-    border: none;
+    background-color: var(--text-color);
+    border-radius: 30px;
+    border: 1px solid var(--regular-btn-color);
     text-decoration: none;
     color: black;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
+.loginBtn:hover {
+    background-color: rgba(6, 108, 241, 0.712);
+    color: var(--text-color);
+    border: none;
+}
+
 .signupLinkMenu {
     display: flex;
+    justify-content: center;
     gap: 10px;
 }
 

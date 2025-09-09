@@ -1,1 +1,10 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* full viewport height */
+}
+
+main {
+  flex: 1; /* grows to push footer down as the <main> will only be as tall as its content without it */
+}
 

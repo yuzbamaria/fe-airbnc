@@ -1,9 +1,11 @@
 :root {
   --accent-color: #ecb920;
+  --regular-btn-color: #494741;
+  --text-color: #f0efee;
 }
 
 body {
-  background-color: rgb(254, 250, 245);
+  background-color: #f0efee;
 }
 
 * {
@@ -15,9 +17,4 @@ body {
 
 ul {
   list-style: none;
-}
-
-main {
-  height: 80vh;
-  overflow: auto; 
 }

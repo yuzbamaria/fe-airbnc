@@ -36,7 +36,7 @@ export default function SingleProperty() {
 
     const images = property.images;
     return (
-            <main>
+            <div className={styles.main}>
                 {isLoading 
                 ? <SkeletonSingleProperty /> 
                 : <section className={styles.propertySection}>
@@ -89,6 +89,6 @@ export default function SingleProperty() {
                     </div>
                 </section>
                 }
-            </main>
+            </div>
     )
 }

@@ -1,5 +1,5 @@
 .hero {
-    position: relative;
+    /* position: relative; */
     width: 100%;
     overflow: hidden;
 }
@@ -19,7 +19,7 @@
   left: 0;
   width: 100%;
   height: 40%;
-  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 1));
+  background: linear-gradient(to bottom, transparent, #f0efee);
 }
 
 .bannerText {
@@ -33,7 +33,7 @@
 .heroImg {
   width: 100%;
   height: 100%;
-  opacity: 0.9;
+  /* opacity: 0.9; */
   object-fit: cover;
   object-position: center;
 }
@@ -41,7 +41,7 @@
 h2 {
   font-size: 2em;
   font-family: "Oswald", sans-serif;
-  color: white;
+  color: var(--text-color);
   font-optical-sizing: auto;
   font-weight: bold;
   font-style: normal;
@@ -49,10 +49,6 @@ h2 {
 }
 
 @media only screen and (min-width: 481px) {
-  /* .container {
-    height: 50vh;
-  } */
-
   .bannerText {
     top: 50%;
     left: 30px;
@@ -65,10 +61,6 @@ h2 {
 }
 
 @media only screen and (min-width: 769px) {
-  /* .container {
-    height: 80vh;
-  } */
-
   .bannerText {
     left: 40px;
   }
