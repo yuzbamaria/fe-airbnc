@@ -1,167 +1,170 @@
 .openFiltersModal {
-    display: flex; 
-    position: fixed;
-    z-index: 1;
-    padding-top: 100px;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0,0,0); 
-    background-color: rgba(0,0,0,0.4);
+  display: flex;
+  position: fixed;
+  z-index: 20;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .openFiltersSection {
-    display: flex;
-    flex-direction: column;
-    margin: auto;
-    padding: 20px;
-    background-color: #fefefe;
-    border: 1px solid #888;
-    border-radius: 15px;
-    width: 350px;
-    height: auto;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  padding: 20px;
+  background-color: #fefefe;
+  border: 1px solid #888;
+  border-radius: 15px;
+  width: 350px;
+  height: auto;
 }
 
 .openFiltersModalTop {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid rgb(227, 227, 227);
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgb(227, 227, 227);
 }
 
 .closeFiltersModalIcon {
-    font-size: 2rem; 
+  font-size: 2rem;
 }
 .closeFiltersModalIcon:hover {
-    cursor: pointer;
-    color:  #497ad6;
+  cursor: pointer;
+  color: #497ad6;
 }
 .closeFiltersModalIcon:active {
-    color: red;
+  color: red;
 }
-
 
 .openFiltersContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
 }
 
-.sortingContainer, .slidersContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 100%; 
-    padding: 30px 0;
-    border-bottom: 1px solid rgb(227, 227, 227);
+.sortingContainer,
+.slidersContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  padding: 30px 0;
+  border-bottom: 1px solid rgb(227, 227, 227);
 }
 
-.sortContainerHeading, .slidersHeading {
-    font-size: 0.9rem;
-    padding-bottom: 10px
+.sortContainerHeading,
+.slidersHeading {
+  font-size: 0.9rem;
+  padding-bottom: 10px;
 }
 
 .sortOption {
-    display: flex; 
-    align-items: center; 
-    gap: 0.5rem;   
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
 }
 
-.inputStyling{
-    cursor: pointer;
-    height: 1rem;
-    width: 1rem;
+.inputStyling {
+  cursor: pointer;
+  height: 1rem;
+  width: 1rem;
 }
 
-.sortOptionText, .slidersText {
-    font-size: 0.8rem;
+.sortOptionText,
+.slidersText {
+  font-size: 0.8rem;
 }
 
 .slider {
-    -webkit-appearance: none; 
-    appearance: none;
-    width: 100%;
-    height: 2px; 
-    background-color: black; 
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 2px;
+  background-color: black;
 }
 
 .slider::-webkit-slider-thumb {
-    -webkit-appearance: none; 
-    appearance: none;
-    width: 12px; 
-    height: 12px; 
-    background-color: black; 
-    border-radius: 50%; 
-    cursor: pointer; 
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  background-color: black;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .filtersSubmitBtn {
-    padding: 15px;
-    width: auto;
-    font-family: "Montserrat", serif;
-    font-size: 1rem;
-    font-weight: 500;
-    background-color: white;
-    border: 1px solid #497ad6;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 
-                0 6px 20px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  width: auto;
+  font-family: "Montserrat", serif;
+  font-size: 1rem;
+  font-weight: 500;
+  background-color: white;
+  border: 1px solid #497ad6;
+  border-radius: 15px;
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.1),
+    0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
 .filtersSubmitBtn:hover {
-    cursor: pointer;
-    color: #497ad6;
+  cursor: pointer;
+  color: #497ad6;
 }
 
 .filtersSubmitBtn:active {
-    color: red;
+  color: red;
 }
 .controls {
-    width: 100%;
-    display: flex;
-    gap: 60px;
-    justify-content: space-between;
-    margin-top: 40px;
+  width: 100%;
+  display: flex;
+  gap: 60px;
+  justify-content: space-between;
+  margin-top: 40px;
 }
 
 .clearFiltersBtn {
-    background-color: white;
-    border: none;
-    font-size: 1.1rem;
+  background-color: white;
+  border: none;
+  font-size: 1.1rem;
 }
 
 @media only screen and (min-width: 481px) {
-    .filtersContainer {
-        padding: 20px 30px;
-    }
-    .slider {
-        width: 60%;
-    }
+  .filtersContainer {
+    padding: 20px 30px;
+  }
+  .slider {
+    width: 60%;
+  }
 }
 
 @media only screen and (min-width: 769px) {
-    .filtersContainer {
-        padding: 30px 40px;
-    }
-    .slider {
-        width: 50%;
-    }
+  .filtersContainer {
+    padding: 30px 40px;
+  }
+  .slider {
+    width: 50%;
+  }
 }
 
 @media only screen and (min-width: 1201px) {
-    .filtersContainer {
-        padding: 30px 80px;
-    }
-    .slider {
-        width: 55%;
-    }
-    .openFiltersSection {
-        width: 600px;
-        padding: 60px 40px;
-    }
+  .filtersContainer {
+    padding: 30px 80px;
+  }
+  .slider {
+    width: 55%;
+  }
+  .openFiltersSection {
+    width: 600px;
+    padding: 60px 40px;
+  }
 }

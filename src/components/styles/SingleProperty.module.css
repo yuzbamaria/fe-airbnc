@@ -89,7 +89,7 @@
     text-align: center;
     width: 175px;
     padding: 1rem 2rem;
-    /* border-radius: 7px; */
+    border-radius: 20px;
     border: none;
     background-color: var(--accent-color);
     font-size: 1.3rem;
@@ -100,7 +100,7 @@
 }
 
 .reserveBtn:hover {
-    background-color:  #cca01c;
+    background-color: var(--accent-color-hover);
 }
 
 @media only screen and (min-width: 481px) {

@@ -1,6 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import { useRef } from "react";
+import { useState, useRef } from "react";
 import Header from "./components/Header";
 import Home from "./components/Home";
 import Footer from "./components/Footer";
@@ -11,13 +11,31 @@ import BookingConfirmation from "./components/BookingConfirmation";
 import GuestProfile from "./components/GuestProfile";
 import HostDashboard from "./components/HostDashboard";
 import AddReview from "./components/AddReview";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
 
 function App() {
   const propertiesSectionRef = useRef(null);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
+
+  function handleLoginLinkClick() {
+    setIsLoginModalOpen(true);
+    setIsSignupModalOpen(false);
+  }
+
+  function handleSignupClickFromLogin() {
+    setIsSignupModalOpen(true);
+    setIsLoginModalOpen(false);
+  }
 
   return (
     <div className="app">
-      <Header propertiesRef={propertiesSectionRef} />
+      <Header
+        propertiesRef={propertiesSectionRef}
+        onLoginClick={() => setIsLoginModalOpen(true)}
+        onSignupClick={() => setIsSignupModalOpen(true)}
+      />
       <main>
         <Routes>
           <Route
@@ -35,6 +53,16 @@ function App() {
           <Route path="/properties" element={<HostDashboard />} />
           <Route path="/properties/:id/reviews" element={<AddReview />} />
         </Routes>
+        {isLoginModalOpen && (
+          <Login
+            setIsLoginModalOpen={setIsLoginModalOpen}
+            onSignupClick={handleSignupClickFromLogin}
+          />
+        )}
+
+        {isSignupModalOpen && (
+          <Signup setIsSignupModalOpen={setIsSignupModalOpen} />
+        )}
       </main>
       <Footer />
     </div>

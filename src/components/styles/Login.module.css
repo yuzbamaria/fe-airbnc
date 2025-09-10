@@ -1,7 +1,7 @@
 .loginModalBackground {
     display: flex; 
     position: fixed;
-    z-index: 1;
+    z-index: 30;
     padding-top: 100px;
     left: 0;
     top: 0;
@@ -19,10 +19,12 @@
     padding: 20px;
     background-color: #fefefe;
     border: 1px solid #888;
-    border-radius: 5px;
+    border-radius: 15px;
     width: 85%;
     max-width: 550px;
     height: auto;
+    position: relative;
+    z-index: 1011;
 }
 
 .loginModalTop {
