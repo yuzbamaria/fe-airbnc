@@ -1,34 +1,18 @@
 import styles from "./styles/Login.module.css";
-import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "./auth/AuthProvider";
 
 export default function Login({ setIsLoginModalOpen, onSignupClick }) {
+  const { handleLogin } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [registeredUser, setRegisteredUser] = useState([]);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   function handleCloseLoginModal() {
     setIsLoginModalOpen(false);
   }
-
-  function fetchRegisteredUser() {
-    axios
-      .post(
-        "https://be-airbnc-zw86.onrender.com/api/login",
-        { email, password },
-        { headers: { "Content-Type": "application/json" } }
-      )
-      .then((response) => {
-        const data = response.data;
-        setRegisteredUser(data);
-        navigate(`/users/${data.user.user_id}`);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -36,10 +20,17 @@ export default function Login({ setIsLoginModalOpen, onSignupClick }) {
     if (!email || !password) {
       setError("Please fill in all required fields.");
       return;
-    }
+    };
 
-    fetchRegisteredUser();
-  };
+    handleLogin(email, password)
+      .then((res) => {
+        handleCloseLoginModal();
+        navigate(`/users/${res.user.user_id}`);
+      })
+      .catch((err) => {
+        setError(err.response?.data?.msg || "Login failed");
+      });
+  }
 
   return (
     <>
@@ -72,7 +63,7 @@ export default function Login({ setIsLoginModalOpen, onSignupClick }) {
               {" "}
               Password:
               <input
-                type="text"
+                type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className={styles.loginFormInput}
@@ -80,6 +71,9 @@ export default function Login({ setIsLoginModalOpen, onSignupClick }) {
                 required
               />
             </label>
+
+            {error && <p className={styles.loginError}>{error}</p>}
+
             <input type="submit" value="Log in" className={styles.loginBtn} />
           </form>
           <div className={styles.signupLinkMenu}>
