@@ -33,8 +33,8 @@ function App() {
     <div className="app">
       <Header
         propertiesRef={propertiesSectionRef}
-        onLoginClick={() => setIsLoginModalOpen(true)}
-        onSignupClick={() => setIsSignupModalOpen(true)}
+        onLogin={() => setIsLoginModalOpen(true)}
+        onSignup={() => setIsSignupModalOpen(true)}
       />
       <main>
         <Routes>

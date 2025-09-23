@@ -1,185 +1,194 @@
+/* .header { */
+  /* position: static; normal flow by default */
+  /* width: 100%; */
+  /* background-color: var(--text-color); */
+/* } */
+
+/* ===== Mobile header (visible up to 640px) ===== */
 .header {
-  position: static; /* normal flow by default */
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  background-color: var(--text-color);
+  height: 60px;
+  z-index: 10;
+  padding: 10px 20px;
+  
 }
 
-.header.overlay  {
-  overflow: hidden;
-  position: absolute;  /* sits on top of Hero only */
-  left: 50%; /* center horizontally */
-  transform: translateX(-50%);
-  z-index: 10; /* ensure it's above hero */
-  background-color: transparent;
-}
-
-.nav {
-  width: 100%;
-  height: 10vh;
+/* ===== Mobile container ===== */
+.mobileContainer {
   display: flex;
-  align-items: center;
+  flex-direction: row;
   justify-content: space-between;
-  padding: 20px;
-  position: relative;
+  align-items: center;
+}
+/* Transparent overlay style on homepage */
+/* .header.overlay {
+  overflow: hidden;
+  position: absolute; /* sits on top of Hero only */
+  /* left: 50%; center horizontally */
+  /* transform: translateX(-50%); */
+  /* z-index: 10; ensure it's above hero */
+  /* background-color: transparent; */
+/* } */ 
+
+/* ===== Mobile overlay ===== */
+.mobileOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-color: transparent;
   z-index: 20;
+}
+
+.closeMobileMenuBtn {
+  position: absolute;
+  top: 25px;
+  right: 20px;
+  z-index: 25;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.mobileDrawer {
+  width: 100%;
+  height: 100%;
+  background: white;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.userMenu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  gap: 30px;
+}
+
+.userInfo {
+  padding: 10px 16px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.navList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  border: none;
+  background: transparent;
+  font-size: 1.8rem;
+  color: white;
+  cursor: pointer;
+}
+
+.mobileMenuHamburger {
+  border: none;
+  background-color: rgba(73, 71, 65, 0.6);
+  font-size: 1.5rem;
+  padding: 6px 10px;
+  border-radius: 50%;
+  color: var(--text-color);
+  cursor: pointer;
 }
 
 .logo {
   font-family: "Funnel Display", sans-serif;
   font-size: 2rem;
   font-weight: 500;
-  font-style: normal;
   text-decoration: none;
   color: var(--regular-btn-color);
-  position: absolute;
-  top: 50%; /* push halfway down the nav */
-  left: 50%; /* push halfway across the nav */
-  transform: translate(-50%, -50%);
 }
 
-.logo:hover {
-  cursor: pointer;
-}
-
-.menuIcon {
-  border: none;
-  background-color: rgba(73, 71, 65, 0.6);
-  font-size: 1.6rem;
-  padding: 5px 10px;
-  border-radius: 50%;
-  color: var(--text-color);
-  cursor: pointer;
-}
-
-.open {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  gap: 20px;
-  top: 79px;
-  left: 0;
-  width: 50%;
-  height: 30%;
-  padding: 30px 10px;
-  background-color: white;
-  z-index: 30; /* Higher than other content */
-}
-
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 120px;
-  z-index: 25; /* Between nav and open menu */
-}
-
-.navLink {
-  font-size: 0.9rem;
-  color: black;
-  padding: 12px 20px;
-  text-decoration: none;
-}
-
-.navLink:hover {
-  background-color: #e1e0df;
-  border-radius: 20px;
-  padding: 12px 20px;
-  cursor: pointer;
-}
-
-.desktopLinks {
+/* ===== Desktop nav ===== */
+.desktopNav {
   display: none;
 }
 
-.modesLinks {
-  text-decoration: none;
-  color: black;
-  font-size: 0.9rem;
+.desktopNav ul {
+  display: flex;
+  gap: 25px;
+  list-style: none;
 }
 
-.modesLinks:hover {
+.desktopNav li {
+  font-size: 1rem;
   cursor: pointer;
 }
 
-.authBtns {
-  background: var(--accent-color);
-  padding: 12px 20px;
+.userSection {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.logoutBtn {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+}
+/* 
+.currentUser {
+  
+} */
+
+.authBtn {
+  width: 120px;
   border: none;
   border-radius: 20px;
-  font-size: 0.9rem;
-}
-
-.authBtns:hover {
-  background-color: var(--accent-color-hover);
+  background: var(--accent-color);
+  color: white;
+  padding: 15px 20px;
   cursor: pointer;
+  font-size: 16px;
 }
 
-@media only screen and (min-width: 481px) {
-  .nav {
-    padding: 20px 30px;
-  }
-  .open {
-    padding: 20px 30px;
-  }
-  .navLink {
-    font-size: 1rem;
-  }
+.authBtn:hover {
+  background: var(--accent-color-hover);
 }
 
-@media only screen and (min-width: 769px) {
-  .header.overlay {
-    width: 80%;
-    height: 120px;
-  }
+.logoutBtn:hover {
+  background: #e1e0df;
+}
 
-  nav {
-    padding: 30px 40px;
-  }
-  .modesLinks {
-    font-size: 1rem;
-  }
-  .open {
-    padding: 30px 40px;
-  }
-  .navLink {
-    font-size: 1.2rem;
+/* ===== Breakpoints ===== */
+@media (min-width: 640px) {
+  .mobileContainer {
+    display: none;
   }
 }
 
 @media only screen and (min-width: 1201px) {
-  .nav {
+  .desktopNav {
     display: flex;
-    justify-content: space-between; /* center the content */
+    justify-content: center;
     align-items: center;
-    width: 80%;
     height: 8vh;
-    margin: 20px auto 0 auto;
+    width: 80%;
+    gap: 60px;
     padding: 10px 30px;
     background-color: var(--text-color);
-    gap: 60px;
     border-radius: 50px;
     box-shadow:
       0 2px 4px rgba(0, 0, 0, 0.1),
       0 6px 10px rgba(0, 0, 0, 0.1);
-  }
-
-  .desktopLinks {
-    display: flex;
-    gap: 30px; /* space between links */
-    list-style: none;
-    align-items: center;
-  }
-  .menuIcon {
-    display: none;
-  }
-
-  .navLink {
-    font-size: 1rem;
-  }
-
-  .authBtns {
-      margin-right: 20px;
   }
 }

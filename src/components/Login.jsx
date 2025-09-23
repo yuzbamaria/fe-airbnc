@@ -24,6 +24,7 @@ export default function Login({ setIsLoginModalOpen, onSignupClick }) {
 
     handleLogin(email, password)
       .then((res) => {
+        console.log(res.user)
         handleCloseLoginModal();
         navigate(`/users/${res.user.user_id}`);
       })
