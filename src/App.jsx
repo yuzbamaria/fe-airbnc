@@ -16,12 +16,23 @@ import Signup from "./components/Signup";
 
 function App() {
   const propertiesSectionRef = useRef(null);
+  const footerRef = useRef(null);
+
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
 
-  function handleLoginLinkClick() {
-    setIsLoginModalOpen(true);
-    setIsSignupModalOpen(false);
+  function scrollToProperties() {
+    propertiesSectionRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }
+
+  function scrollToFooter() { 
+    footerRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
   }
 
   function handleSignupClickFromLogin() {
@@ -32,7 +43,8 @@ function App() {
   return (
     <div className="app">
       <Header
-        propertiesRef={propertiesSectionRef}
+        onScrollToProperties={scrollToProperties}
+        onScrollToFooter={scrollToFooter}
         onLogin={() => setIsLoginModalOpen(true)}
         onSignup={() => setIsSignupModalOpen(true)}
       />
@@ -64,7 +76,7 @@ function App() {
           <Signup setIsSignupModalOpen={setIsSignupModalOpen} />
         )}
       </main>
-      <Footer />
+      <Footer ref={footerRef} />
     </div>
   );
 }

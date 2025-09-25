@@ -7,20 +7,20 @@ import { useState, useRef } from "react";
 import { useAuth } from "./auth/AuthProvider";
 // import { useUser } from "../contexts/UserContext";
 
-export default function Header({ propertiesRef, onLogin, onSignup }) {
+export default function Header({
+  onScrollToProperties,
+  onScrollToFooter,
+  onLogin,
+  onSignup,
+}) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  // const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   // const { guestId, hostId } = useUser();
   const { currentUser, handleLogout } = useAuth();
-  const propertiesRefLargeScreens = useRef(null);
+  // const propertiesRefLargeScreens = useRef(null);
   const location = useLocation();
   const isHome = location.pathname === "/"; // check if we are on homepage
-
-  function handleScrollToProperties() {
-    if (propertiesRef && propertiesRef.current) {
-      propertiesRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  }
+  const navigate = useNavigate();
 
   function toggleMobileMenu() {
     setIsMenuOpen(!isMenuOpen);
@@ -33,12 +33,9 @@ export default function Header({ propertiesRef, onLogin, onSignup }) {
     }
   }
 
-  function toggleUserMenu() {
-    setIsUserMenuOpen(!isUserMenuOpen);
-  }
-
   function onLogout() {
     handleLogout();
+    setIsMenuOpen(false);
     navigate("/");
   }
 
@@ -82,18 +79,28 @@ export default function Header({ propertiesRef, onLogin, onSignup }) {
 
                   {/* Bottom logout */}
                   <div className={styles.logoutWrapper}>
-                    <button onClick={onLogout} className={styles.logoutBtn}>
+                    <button onClick={onLogout} className={styles.authBtn}>
                       Logout
                     </button>
                   </div>
                 </div>
               ) : (
                 <ul className={styles.navList}>
-                  <li onClick={handleScrollToProperties}>Properties</li>
-                  <li>
-                    <Link to="/contacts" onClick={toggleMobileMenu}>
-                      Contacts
-                    </Link>
+                  <li
+                    onClick={() => {
+                      onScrollToProperties();
+                      setIsMenuOpen(false);
+                    }}
+                  >
+                    Properties
+                  </li>
+                  <li
+                    onClick={() => {
+                      onScrollToFooter();
+                      setIsMenuOpen(false);
+                    }}
+                  >
+                    Contacts
                   </li>
                   <li>
                     <button

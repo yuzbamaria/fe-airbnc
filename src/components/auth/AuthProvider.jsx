@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import * as jwt_decode from "jwt-decode"
+import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 
 const AuthContext = createContext();
@@ -13,6 +13,8 @@ export default function AuthProvider({ children }) {
     const savedUser = localStorage.getItem("user");
     return savedUser ? JSON.parse(savedUser) : null;
   });
+
+  // const jwtDecode = jwtDecodeModule.default || jwtDecodeModule;
 
   // setting the header globally
   useEffect(() => {
@@ -28,7 +30,7 @@ export default function AuthProvider({ children }) {
     const url = "https://be-airbnc-zw86.onrender.com/api/login";
     return axios.post(url, { email, password }).then((res) => {
         const { user, token } = res.data;
-        const decoded = jwt_decode(token);  // Decode JWT to get expiry timestamp
+        const decoded = jwtDecode(token);  // Decode JWT to get expiry timestamp
 
         setAuthToken(token);
         setCurrentUser(user);
