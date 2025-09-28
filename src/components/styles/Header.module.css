@@ -1,185 +1,179 @@
+/* ===== Mobile header (visible up to 640px) ===== */
 .header {
-  position: static; /* normal flow by default */
-  width: 100%;
-  background-color: var(--text-color);
-}
-
-.header.overlay  {
-  overflow: hidden;
-  position: absolute;  /* sits on top of Hero only */
-  left: 50%; /* center horizontally */
-  transform: translateX(-50%);
-  z-index: 10; /* ensure it's above hero */
-  background-color: transparent;
-}
-
-.nav {
-  width: 100%;
-  height: 10vh;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px;
-  position: relative;
-  background-color: transparent;
-  z-index: 20;
-}
-
-.logo {
-  font-family: "Funnel Display", sans-serif;
-  font-size: 2rem;
-  font-weight: 500;
-  font-style: normal;
-  text-decoration: none;
-  color: var(--regular-btn-color);
-  position: absolute;
-  top: 50%; /* push halfway down the nav */
-  left: 50%; /* push halfway across the nav */
-  transform: translate(-50%, -50%);
-}
-
-.logo:hover {
-  cursor: pointer;
-}
-
-.menuIcon {
-  border: none;
-  background-color: rgba(73, 71, 65, 0.6);
-  font-size: 1.6rem;
-  padding: 5px 10px;
-  border-radius: 50%;
-  color: var(--text-color);
-  cursor: pointer;
-}
-
-.open {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  gap: 20px;
-  top: 79px;
+  top: 0;
   left: 0;
-  width: 50%;
-  height: 30%;
-  padding: 30px 10px;
-  background-color: white;
-  z-index: 30; /* Higher than other content */
+  width: 100%;
+  padding: 10px 20px;
 }
 
-.overlay {
+/* ===== Mobile container ===== */
+.mobileContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ===== Mobile overlay ===== */
+.mobileOverlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 120px;
-  z-index: 25; /* Between nav and open menu */
+  height: 100%;
+  background-color: transparent;
+  z-index: 20;
 }
 
-.navLink {
-  font-size: 0.9rem;
-  color: black;
-  padding: 12px 20px;
+.closeMobileMenuBtn {
+  position: absolute;
+  top: 25px;
+  right: 20px;
+  z-index: 25;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.mobileDrawer {
+  width: 100%;
+  height: 100%;
+  background: white;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.userMenu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  gap: 30px;
+}
+
+.userInfo {
+  padding: 10px 16px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.currentUser {
   text-decoration: none;
+  color: black;
 }
 
-.navLink:hover {
+.navList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  font-size: 18px;
+}
+
+.navList:active {
   background-color: #e1e0df;
   border-radius: 20px;
   padding: 12px 20px;
   cursor: pointer;
 }
 
-.desktopLinks {
+.closeBtn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  border: none;
+  background: transparent;
+  font-size: 1.8rem;
+  color: white;
+  cursor: pointer;
+}
+
+.mobileMenuHamburger {
+  border: none;
+  background-color: rgba(73, 71, 65, 0.6);
+  font-size: 1.5rem;
+  padding: 6px 10px;
+  border-radius: 50%;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+.logo {
+  font-family: "Funnel Display", sans-serif;
+  font-size: 2rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--regular-btn-color);
+}
+
+.desktopNav {
   display: none;
 }
 
-.modesLinks {
-  text-decoration: none;
-  color: black;
-  font-size: 0.9rem;
+.userSection {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
-.modesLinks:hover {
-  cursor: pointer;
-}
-
-.authBtns {
-  background: var(--accent-color);
-  padding: 12px 20px;
+.authBtn {
+  width: 120px;
   border: none;
-  border-radius: 20px;
-  font-size: 0.9rem;
-}
-
-.authBtns:hover {
-  background-color: var(--accent-color-hover);
+  border-radius: 50px;
+  background: var(--accent-color);
+  color: white;
+  padding: 10px 5px;
   cursor: pointer;
+  font-size: 18px;
 }
 
-@media only screen and (min-width: 481px) {
-  .nav {
-    padding: 20px 30px;
-  }
-  .open {
-    padding: 20px 30px;
-  }
-  .navLink {
-    font-size: 1rem;
-  }
+.authBtn:hover {
+  background: var(--accent-color-hover);
 }
 
-@media only screen and (min-width: 769px) {
-  .header.overlay {
-    width: 80%;
-    height: 120px;
-  }
-
-  nav {
-    padding: 30px 40px;
-  }
-  .modesLinks {
-    font-size: 1rem;
-  }
-  .open {
-    padding: 30px 40px;
-  }
-  .navLink {
-    font-size: 1.2rem;
-  }
-}
-
-@media only screen and (min-width: 1201px) {
-  .nav {
-    display: flex;
-    justify-content: space-between; /* center the content */
-    align-items: center;
-    width: 80%;
-    height: 8vh;
-    margin: 20px auto 0 auto;
-    padding: 10px 30px;
-    background-color: var(--text-color);
-    gap: 60px;
+/* ===== Breakpoints ===== */
+@media (min-width: 640px) {
+  .logoContainer {
+    padding: 10px 12px;
     border-radius: 50px;
-    box-shadow:
-      0 2px 4px rgba(0, 0, 0, 0.1),
-      0 6px 10px rgba(0, 0, 0, 0.1);
   }
+}
 
-  .desktopLinks {
+@media (min-width: 1024px) {
+  .desktopNav {
+    width: 80%;
+    margin: 0 auto;
     display: flex;
-    gap: 30px; /* space between links */
-    list-style: none;
+    justify-content: space-between;
     align-items: center;
   }
-  .menuIcon {
+
+  .desktopNav ul {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    list-style: none;
+  }
+
+  .desktopNav li {
+    font-size: 1rem;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .mobileContainer {
     display: none;
   }
 
-  .navLink {
-    font-size: 1rem;
-  }
-
-  .authBtns {
-      margin-right: 20px;
+  .userInfo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
   }
 }

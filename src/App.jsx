@@ -13,15 +13,27 @@ import HostDashboard from "./components/HostDashboard";
 import AddReview from "./components/AddReview";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 
 function App() {
   const propertiesSectionRef = useRef(null);
+  const footerRef = useRef(null);
+
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
 
-  function handleLoginLinkClick() {
-    setIsLoginModalOpen(true);
-    setIsSignupModalOpen(false);
+  function scrollToProperties() {
+    propertiesSectionRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }
+
+  function scrollToFooter() {
+    footerRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
   }
 
   function handleSignupClickFromLogin() {
@@ -32,9 +44,10 @@ function App() {
   return (
     <div className="app">
       <Header
-        propertiesRef={propertiesSectionRef}
-        onLoginClick={() => setIsLoginModalOpen(true)}
-        onSignupClick={() => setIsSignupModalOpen(true)}
+        onScrollToProperties={scrollToProperties}
+        onScrollToFooter={scrollToFooter}
+        onLogin={() => setIsLoginModalOpen(true)}
+        onSignup={() => setIsSignupModalOpen(true)}
       />
       <main>
         <Routes>
@@ -44,14 +57,39 @@ function App() {
           />
           <Route path="/property/:id" element={<SingleProperty />} />
           <Route path="/property/:id/reviews" element={<Reviews />} />
-          <Route path="/properties/:id/booking" element={<PropertyBooking />} />
+          <Route
+            path="/properties/:id/booking"
+            element={
+              <ProtectedRoute onLogin={() => setIsLoginModalOpen(true)}>
+                <PropertyBooking />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/booking-confirmation"
-            element={<BookingConfirmation />}
+            element={
+              <ProtectedRoute onLogin={() => setIsLoginModalOpen(true)}>
+                <BookingConfirmation />
+              </ProtectedRoute>
+            }
           />
-          <Route path="/users/:id" element={<GuestProfile />} />
+          <Route
+            path="/users/:id"
+            element={
+              <ProtectedRoute onLogin={() => setIsLoginModalOpen(true)}>
+                <GuestProfile />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/properties" element={<HostDashboard />} />
-          <Route path="/properties/:id/reviews" element={<AddReview />} />
+          <Route
+            path="/properties/:id/reviews"
+            element={
+              <ProtectedRoute onLogin={() => setIsLoginModalOpen(true)}>
+                <AddReview />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
         {isLoginModalOpen && (
           <Login
@@ -64,7 +102,7 @@ function App() {
           <Signup setIsSignupModalOpen={setIsSignupModalOpen} />
         )}
       </main>
-      <Footer />
+      <Footer ref={footerRef} />
     </div>
   );
 }

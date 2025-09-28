@@ -110,3 +110,9 @@
     border: none;
     text-decoration: underline;
 }
+
+.loginError {
+  color: red;
+  font-size: 0.85rem;
+  margin: 0.5rem 0;
+}
