@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { cross } from "../icons";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { useAuth } from "./auth/AuthProvider";
 // import { useUser } from "../contexts/UserContext";
 
@@ -11,13 +11,11 @@ export default function Header({
   onScrollToProperties,
   onScrollToFooter,
   onLogin,
-  onSignup,
 }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   // const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   // const { guestId, hostId } = useUser();
   const { currentUser, handleLogout } = useAuth();
-  // const propertiesRefLargeScreens = useRef(null);
   const location = useLocation();
   const isHome = location.pathname === "/"; // check if we are on homepage
   const navigate = useNavigate();
@@ -67,16 +65,6 @@ export default function Header({
                     </Link>
                   </div>
 
-                  {/* Middle nav */}
-                  {/* <ul className={styles.navList}>
-                    <li onClick={handleScrollToProperties}>Properties</li>
-                    <li>
-                      <Link to="/contacts" onClick={toggleMobileMenu}>
-                        Contacts
-                      </Link>
-                    </li>
-                  </ul> */}
-
                   {/* Bottom logout */}
                   <div className={styles.logoutWrapper}>
                     <button onClick={onLogout} className={styles.authBtn}>
@@ -118,13 +106,16 @@ export default function Header({
 
         {/* =======> Mobile menu button (visible only < 640px) <======= */}
         <div className={styles.mobileContainer}>
-          <button
-            onClick={toggleMobileMenu}
-            className={styles.mobileMenuHamburger}
-            aria-label="Toggle menu"
-          >
-            <FontAwesomeIcon icon={faBars} />
-          </button>
+          <div>
+            <button
+              onClick={toggleMobileMenu}
+              className={styles.mobileMenuHamburger}
+              aria-label="Toggle menu"
+            >
+              <FontAwesomeIcon icon={faBars} />
+            </button>
+          </div>
+
           <div className={styles.logoContainer}>
             <Link to="/" className={styles.logo}>
               AirBNC
@@ -133,185 +124,38 @@ export default function Header({
         </div>
 
         {/* =======> Desktop navigation (hidden on mobile) <======= */}
-        {/* <nav className={styles.desktopNav}>
+        <nav className={styles.desktopNav}>
+          <div className={styles.logoContainer}>
+            <Link to="/" className={styles.logo}>
+              AirBNC
+            </Link>
+          </div>
           <ul>
-            <li
-              ref={propertiesRefLargeScreens}
-              onClick={handleScrollToProperties}
-            >
-              Properties
-            </li>
-            <li className={styles.logoContainer}>
-              <Link to="/" className={styles.logo}>
-                AirBNC
-              </Link>
-            </li>
-            <li>
-              <Link to="/contacts">Contacts</Link>
-            </li>
-            {currentUser ? (
-              <li className={styles.userSection}>
-                <button className={styles.currentUser}>
-                  {currentUser.first_name.charAt(0)}
-                </button>
-                <button className={styles.logoutBtn} onClick={onLogout}>
-                  Logout
-                </button>
-              </li>
-            ) : (
-              <li>
-                <button className={styles.authBtn} onClick={onLoginClick}>
-                  Log in
-                </button>
-              </li>
-            )}
+            <li onClick={onScrollToProperties}>Properties</li>
+            <li onClick={onScrollToFooter}>Contacts</li>
           </ul>
-        </nav> */}
+
+          {currentUser ? (
+            <div className={styles.userInfo}>
+              <Link
+                to={`/users/${currentUser.user_id}`}
+                className={styles.currentUser}
+              >
+                {currentUser.first_name}
+              </Link>
+              <button className={styles.authBtn} onClick={onLogout}>
+                Logout
+              </button>
+            </div>
+          ) : (
+            <div>
+              <button className={styles.authBtn} onClick={onLogin}>
+                Log in
+              </button>
+            </div>
+          )}
+        </nav>
       </header>
     </>
   );
 }
-
-//   {isMenuOpen && (
-//   <div className={styles.mobileOverlay}>
-//     <button
-//       className={styles.closeBtn}
-//       onClick={toggleMobileMenu}
-//       aria-label="Close menu"
-//     >
-//       <FontAwesomeIcon icon={faTimes} />
-//     </button>
-//     <div className={styles.mobileDrawer}>
-//       <ul>
-//         <li onClick={handleScrollToProperties}>Properties</li>
-//         <li>
-//           <Link to="/contacts" onClick={toggleMobileMenu}>
-//             Contacts
-//           </Link>
-//         </li>
-//         {currentUser ? (
-//           <li>
-//             <button onClick={onLogout}>Logout</button>
-//           </li>
-//         ) : (
-//           <li>
-//             <button onClick={onLoginClick}>Log in</button>
-//           </li>
-//         )}
-//       </ul>
-//     </div>
-//   </div>
-// )}
-
-//   <nav className={styles.nav}>
-//     {isMenuOpen && (
-//       <>
-//         <div
-//           className={styles.overlay}
-//           onClick={toggleMobileMenu}
-//           aria-label="Close Menu"
-//         >
-//           <ul
-//             className={styles.open}
-//             onClick={(e) => e.stopPropagation()}
-//           >
-//             <li>
-//               <Link to="/" className={styles.navLink}>
-//                 Properties
-//               </Link>
-//             </li>
-//             <li>
-//               <Link to="/contacts" className={styles.navLink}>
-//                 Contacts
-//               </Link>
-//             </li>
-//           </ul>
-//         </div>
-//       </>
-//     )}
-
-//     {/* =======> Mobile container: visible up to 640px <======= */}
-//     <div className="styles.mobileContainer">
-//       {/* <button
-//         className="cursor-pointer mt-4 bg-white rounded-full p-2 shadow"
-//         onClick={toggleMenu}
-//         aria-label="Toggle menu"
-//       >
-//         {hamburger}
-//       </button> */}
-//       <button
-//         onClick={toggleMobileMenu}
-//         className={styles.mobileMenuHamburger}
-//         aria-label="Toggle menu"
-//       >
-//         <FontAwesomeIcon icon={faBars} />
-//       </button>
-//     </div>
-
-//     <ul className={styles.desktopLinks}>
-//       <li
-//         className={styles.navLink}
-//         onClick={() => handleClickOnProperties()}
-//         ref={propertiesRefLargeScreens}
-//       >
-//         Properties
-//       </li>
-//     </ul>
-//     <h1>
-//       <Link to={`/`} className={styles.logo}>
-//         AirBNC
-//       </Link>
-//     </h1>
-//     <ul>
-
-//       {currentUser ? (
-//         <div>
-//           <button className={styles.currentUser}>
-//             {currentUser.first_name.charAt(0)}
-//           </button>
-//           {/* Hamburger menu */}
-//           <button
-//             onClick={toggleUserMenu}
-//             className={styles.menuIcon}
-//             aria-label="Toggle navigation"
-//           >
-//             <FontAwesomeIcon icon={faBars} />
-//           </button>
-//           {isUserMenuOpen && (
-//             <>
-//               <div
-//                 className={styles.overlayUserModal}
-//                 onClick={toggleUserMenu}
-//                 aria-label="Close Menu"
-//               >
-//                 <ul
-//                   className={styles.open}
-//                   onClick={(e) => e.stopPropagation()}
-//                 >
-//                   <li>
-//                     <Link to="/" className={styles.navLink}>
-//                       Properties
-//                     </Link>
-//                   </li>
-//                   <li>
-//                     <Link to="/contacts" className={styles.navLink}>
-//                       Contacts
-//                     </Link>
-//                   </li>
-//                 </ul>
-//               </div>
-//             </>
-//           )}
-//           <button className={styles.logoutBtn} onClick={onLogout}>
-//             Logout
-//           </button>
-//         </div>
-//       ) : (
-//         <li>
-//           <button className={styles.authBtns} onClick={onLoginClick}>
-//             Log in
-//           </button>
-//         </li>
-//       )}
-//     </ul>
-//   </nav>
