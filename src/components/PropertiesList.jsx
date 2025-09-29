@@ -1,13 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import styles from "./styles/PropertiesList.module.css";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Filters from "./Filters";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSliders } from "@fortawesome/free-solid-svg-icons";
+import PropertiesContainer from "./PropertiesContainer";
 import PropertyTypes from "./PropertyTypes";
-import SkeletonPropertyCard from "./SkeletonLoader/SkeletonPropertyCard";
-import SkeletonPropertyTypes from "./SkeletonLoader/SkeletonPropertyTypes";
+
+const DEFAULT_MIN_PRICE = 20;
+const DEFAULT_MAX_PRICE = 500;
 
 export default function PropertiesList({ propertiesRef }) {
   const [propertiesList, setPropertiesList] = useState([]);
@@ -20,8 +22,8 @@ export default function PropertiesList({ propertiesRef }) {
   const sortByQuery = searchParams.get("sort");
   const orderQuery = searchParams.get("order");
 
-  const [minPrice, setMinPrice] = useState(20);
-  const [maxPrice, setMaxPrice] = useState(500);
+  const [minPrice, setMinPrice] = useState(DEFAULT_MIN_PRICE);
+  const [maxPrice, setMaxPrice] = useState(DEFAULT_MAX_PRICE);
 
   const isMostPopularChecked =
     sortByQuery === "popularity" && orderQuery === "desc";
@@ -52,12 +54,8 @@ export default function PropertiesList({ propertiesRef }) {
     const minPriceFromQuery = searchParams.get("minprice");
     const maxPriceFromQuery = searchParams.get("maxprice");
 
-    if (minPriceFromQuery) {
-      setMinPrice(Number(minPriceFromQuery));
-    }
-    if (maxPriceFromQuery) {
-      setMaxPrice(Number(maxPriceFromQuery));
-    }
+    if (minPriceFromQuery) setMinPrice(Number(minPriceFromQuery));
+    if (maxPriceFromQuery) setMaxPrice(Number(maxPriceFromQuery));
   }, []);
 
   function handleSortOption(sort, order) {
@@ -71,22 +69,22 @@ export default function PropertiesList({ propertiesRef }) {
     navigate(`/property/${propertyId}`);
   }
 
+  function updateSearchParam(key, value) {
+    const newParams = new URLSearchParams(searchParams); // create a copy of all existing search parameters, including sort options
+    newParams.set(key, value); // only update the minprice/maxprice parameter
+    setSearchParams(newParams); // searchParams now include both the existing parameters and the new min / max price
+  }
+
   function handleMinPriceSliderChange(e) {
     const newMinPrice = Number(e.target.value);
     setMinPrice(newMinPrice); // update state
-
-    const newParams = new URLSearchParams(searchParams); // create a copy of all existing search parameters, including sort options
-    newParams.set("minprice", newMinPrice); // only update the minprice parameter
-    setSearchParams(newParams); // searchParams now include both the existing parameters and the new min price
+    updateSearchParam("minprice", newMinPrice);
   }
 
   function handleMaxPriceSliderChange(e) {
     const newMaxPrice = Number(e.target.value);
     setMaxPrice(newMaxPrice);
-
-    const newParams = new URLSearchParams(searchParams);
-    newParams.set("maxprice", newMaxPrice);
-    setSearchParams(newParams);
+    updateSearchParam("maxprice", newMaxPrice);
   }
 
   function handleSubmit(e) {
@@ -109,12 +107,10 @@ export default function PropertiesList({ propertiesRef }) {
       )
     : propertiesList;
 
-  const uniquePropertyTypes = [];
-  propertiesList.forEach(({ property_type }) => {
-    if (!uniquePropertyTypes.includes(property_type)) {
-      uniquePropertyTypes.push(property_type);
-    }
-  });
+  const uniquePropertyTypes = useMemo(() => {
+    const types = new Set(propertiesList.map((p) => p.property_type));
+    return [...types]; // spread the Set into an array
+  }, [propertiesList]);
 
   function handleClearFilters() {
     setSearchParams("");
@@ -134,6 +130,7 @@ export default function PropertiesList({ propertiesRef }) {
             <FontAwesomeIcon icon={faSliders} className={styles.bars} />
             Filters
           </button>
+
           {isFiltersModalOpen && (
             <Filters
               minPrice={minPrice}
@@ -152,54 +149,21 @@ export default function PropertiesList({ propertiesRef }) {
           )}
         </div>
 
-        <div className={styles.propertyTypesContainer}>
-          {isLoading ? (
-            Array.from({ length: 9 }).map((_, i) => (
-              <SkeletonPropertyTypes key={i} />
-            ))
-          ) : (
-            <PropertyTypes
-              propertyTypes={uniquePropertyTypes}
-              handlePropertyTypeChange={handlePropertyTypeChange}
-              selectedPropertyType={selectedPropertyType}
-            />
-          )}
-        </div>
+        <PropertyTypes
+          isLoading={isLoading}
+          propertyTypes={uniquePropertyTypes}
+          handlePropertyTypeChange={handlePropertyTypeChange}
+          selectedPropertyType={selectedPropertyType}
+        />
       </section>
 
       <section>
-        <div className={styles.listContainer} ref={propertiesRef}>
-          {isLoading
-            ? Array.from({ length: 12 }).map((_, i) => (
-                <SkeletonPropertyCard key={i} />
-              ))
-            : displayedItems.map(
-                ({
-                  images,
-                  property_name,
-                  location,
-                  cost_per_night,
-                  property_id,
-                }) => (
-                  <div
-                    key={property_id}
-                    className={styles.itemContainer}
-                    onClick={() => handlePropertyCardClick(property_id)}
-                  >
-                    <img
-                      src={images[0]}
-                      alt={property_name}
-                      className={styles.itemImg}
-                    />
-                    <h3 className={styles.propertyName}>{property_name}</h3>
-                    <p className={styles.propertyLocation}>{location}</p>
-                    <p className={styles.propertyPrice}>
-                      £{cost_per_night} night
-                    </p>
-                  </div>
-                )
-              )}
-        </div>
+        <PropertiesContainer
+          properties={displayedItems}
+          onCardClick={handlePropertyCardClick}
+          isLoading={isLoading}
+          propertiesRef={propertiesRef}
+        />
       </section>
     </>
   );
