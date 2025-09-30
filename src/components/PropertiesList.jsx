@@ -1,90 +1,42 @@
-import { useState, useEffect, useMemo } from "react";
-import styles from "./styles/PropertiesList.module.css";
+import { useState, useMemo } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import Filters from "./Filters";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSliders } from "@fortawesome/free-solid-svg-icons";
+import styles from "./styles/PropertiesList.module.css";
+
+import Filters from "./Filters";
 import PropertiesContainer from "./PropertiesContainer";
 import PropertyTypes from "./PropertyTypes";
 
 import useFetchProperties from "../hooks/useFetchProperties";
-
-const DEFAULT_MIN_PRICE = 20;
-const DEFAULT_MAX_PRICE = 500;
+import useFilters from "../hooks/useFilters";
 
 export default function PropertiesList({ propertiesRef }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const { propertiesList, isLoading } = useFetchProperties(searchParams);
+  const filters = useFilters(searchParams, setSearchParams);
   const [isFiltersModalOpen, setIsFiltersModalOpen] = useState(false);
   const [selectedPropertyType, setSelectedPropertyType] = useState("");
   const navigate = useNavigate();
 
-  const sortByQuery = searchParams.get("sort");
-  const orderQuery = searchParams.get("order");
-
-  const [minPrice, setMinPrice] = useState(DEFAULT_MIN_PRICE);
-  const [maxPrice, setMaxPrice] = useState(DEFAULT_MAX_PRICE);
-
-  const isMostPopularChecked =
-    sortByQuery === "popularity" && orderQuery === "desc";
-  const isLeastPopularChecked =
-    sortByQuery === "popularity" && orderQuery === "asc";
-  const isHighestCostChecked =
-    sortByQuery === "cost_per_night" && orderQuery === "desc";
-  const isLowestCostChecked =
-    sortByQuery === "cost_per_night" && orderQuery === "asc";
-
-  function fetchProperties() {
-    
-  }
-
-  useEffect(() => {
-    fetchProperties(); // Fetch all properties on initial load
-
-    const minPriceFromQuery = searchParams.get("minprice");
-    const maxPriceFromQuery = searchParams.get("maxprice");
-
-    if (minPriceFromQuery) setMinPrice(Number(minPriceFromQuery));
-    if (maxPriceFromQuery) setMaxPrice(Number(maxPriceFromQuery));
-  }, []);
-
-  function handleSortOption(sort, order) {
-    const newParams = new URLSearchParams(searchParams);
-    newParams.set("sort", sort);
-    newParams.set("order", order);
-    setSearchParams(newParams);
-  }
-
   function handlePropertyCardClick(propertyId) {
+    // Navigate to property page
     navigate(`/property/${propertyId}`);
   }
 
-  function updateSearchParam(key, value) {
-    const newParams = new URLSearchParams(searchParams); // create a copy of all existing search parameters, including sort options
-    newParams.set(key, value); // only update the minprice/maxprice parameter
-    setSearchParams(newParams); // searchParams now include both the existing parameters and the new min / max price
-  }
-
-  function handleMinPriceSliderChange(e) {
-    const newMinPrice = Number(e.target.value);
-    setMinPrice(newMinPrice); // update state
-    updateSearchParam("minprice", newMinPrice);
-  }
-
-  function handleMaxPriceSliderChange(e) {
-    const newMaxPrice = Number(e.target.value);
-    setMaxPrice(newMaxPrice);
-    updateSearchParam("maxprice", newMaxPrice);
-  }
-
-  function handleSubmit(e) {
+  // Submit filters and trigger fetch
+  const handleSubmit = (e) => {
     e.preventDefault();
-    fetchProperties();
-  }
 
-  function handleFiltersBtnClick() {
-    setIsFiltersModalOpen(true);
-  }
+    const newParams = new URLSearchParams();
+    if (filters.minPrice !== 20) newParams.set("minprice", filters.minPrice);
+    if (filters.maxPrice !== 500) newParams.set("maxprice", filters.maxPrice);
+    if (filters.sort) newParams.set("sort", filters.sort);
+    if (filters.order) newParams.set("order", filters.order);
+
+    setSearchParams(newParams); // triggers API request
+    setIsFiltersModalOpen(false); // close modal
+  };
 
   function handlePropertyTypeChange(e) {
     const type = e.currentTarget.innerText;
@@ -102,18 +54,12 @@ export default function PropertiesList({ propertiesRef }) {
     return [...types]; // spread the Set into an array
   }, [propertiesList]);
 
-  function handleClearFilters() {
-    setSearchParams("");
-    setMinPrice(20);
-    setMaxPrice(500);
-  }
-
   return (
     <>
       <section className={styles.filtersContainer}>
         <div className={styles.leftSideFiltersContainer}>
           <button
-            onClick={handleFiltersBtnClick}
+            onClick={() => setIsFiltersModalOpen(true)}
             className={styles.filtersIcon}
             aria-label="Toggle filters"
           >
@@ -123,18 +69,9 @@ export default function PropertiesList({ propertiesRef }) {
 
           {isFiltersModalOpen && (
             <Filters
-              minPrice={minPrice}
-              maxPrice={maxPrice}
-              isMostPopularChecked={isMostPopularChecked}
-              isLeastPopularChecked={isLeastPopularChecked}
-              isHighestCostChecked={isHighestCostChecked}
-              isLowestCostChecked={isLowestCostChecked}
-              handleSortOption={handleSortOption}
-              handleMinPriceSliderChange={handleMinPriceSliderChange}
-              handleMaxPriceSliderChange={handleMaxPriceSliderChange}
-              handleSubmit={handleSubmit}
+              {...filters}
               setIsFiltersModalOpen={setIsFiltersModalOpen}
-              handleClearFilters={handleClearFilters}
+              handleSubmit={handleSubmit}
             />
           )}
         </div>
