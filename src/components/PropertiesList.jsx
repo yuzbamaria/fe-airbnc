@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSliders } from "@fortawesome/free-solid-svg-icons";
@@ -10,13 +10,20 @@ import PropertyTypes from "./PropertyTypes";
 
 import useFetchProperties from "../hooks/useFetchProperties";
 import useFilters from "../hooks/useFilters";
+import usePropertyTypes from "../hooks/usePropertyTypes";
 
 export default function PropertiesList({ propertiesRef }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const { propertiesList, isLoading } = useFetchProperties(searchParams);
   const filters = useFilters(searchParams, setSearchParams);
+  const {
+    selectedPropertyType,
+    handlePropertyTypeChange,
+    displayedItems,
+    uniquePropertyTypes,
+  } = usePropertyTypes(propertiesList);
   const [isFiltersModalOpen, setIsFiltersModalOpen] = useState(false);
-  const [selectedPropertyType, setSelectedPropertyType] = useState("");
+
   const navigate = useNavigate();
 
   function handlePropertyCardClick(propertyId) {
@@ -37,22 +44,6 @@ export default function PropertiesList({ propertiesRef }) {
     setSearchParams(newParams); // triggers API request
     setIsFiltersModalOpen(false); // close modal
   };
-
-  function handlePropertyTypeChange(e) {
-    const type = e.currentTarget.innerText;
-    setSelectedPropertyType((prevType) => (prevType === type ? "" : type));
-  }
-
-  const displayedItems = selectedPropertyType
-    ? propertiesList.filter(
-        (item) => item.property_type === selectedPropertyType
-      )
-    : propertiesList;
-
-  const uniquePropertyTypes = useMemo(() => {
-    const types = new Set(propertiesList.map((p) => p.property_type));
-    return [...types]; // spread the Set into an array
-  }, [propertiesList]);
 
   return (
     <>

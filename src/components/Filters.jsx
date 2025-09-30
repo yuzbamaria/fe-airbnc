@@ -3,6 +3,8 @@ import styles from "./styles/Filters.module.css";
 export default function Filters({
   minPrice,
   maxPrice,
+  sort, 
+  order,
   handleSortOption,
   handleMinPriceChange,
   handleMaxPriceChange,
@@ -34,6 +36,7 @@ export default function Filters({
                 <input
                   type="radio"
                   name="radio"
+                  checked={sort === "popularity" && order === "desc"}
                   onChange={() => handleSortOption("popularity", "desc")}
                   className={styles.inputStyling}
                 />
@@ -43,6 +46,7 @@ export default function Filters({
                 <input
                   type="radio"
                   name="radio"
+                  checked={sort === "popularity" && order === "asc"}
                   onChange={() => handleSortOption("popularity", "asc")}
                   className={styles.inputStyling}
                 />
@@ -52,6 +56,7 @@ export default function Filters({
                 <input
                   type="radio"
                   name="radio"
+                  checked={sort === "cost_per_night" && order === "desc"}
                   onChange={() => handleSortOption("cost_per_night", "desc")}
                   className={styles.inputStyling}
                 />
@@ -61,6 +66,7 @@ export default function Filters({
                 <input
                   type="radio"
                   name="radio"
+                  checked={sort === "cost_per_night" && order === "asc"}
                   onChange={() => handleSortOption("cost_per_night", "asc")}
                   className={styles.inputStyling}
                 />
