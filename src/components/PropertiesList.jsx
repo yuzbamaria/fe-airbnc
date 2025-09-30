@@ -1,205 +1,87 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import styles from "./styles/PropertiesList.module.css";
+import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import Filters from "./Filters";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSliders } from "@fortawesome/free-solid-svg-icons";
+import styles from "./styles/PropertiesList.module.css";
+
+import Filters from "./Filters";
+import PropertiesContainer from "./PropertiesContainer";
 import PropertyTypes from "./PropertyTypes";
-import SkeletonPropertyCard from "./SkeletonLoader/SkeletonPropertyCard";
-import SkeletonPropertyTypes from "./SkeletonLoader/SkeletonPropertyTypes";
+
+import useFetchProperties from "../hooks/useFetchProperties";
+import useFilters from "../hooks/useFilters";
+import usePropertyTypes from "../hooks/usePropertyTypes";
 
 export default function PropertiesList({ propertiesRef }) {
-  const [propertiesList, setPropertiesList] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
+  const { propertiesList, isLoading } = useFetchProperties(searchParams);
+  const filters = useFilters(searchParams, setSearchParams);
+  const {
+    selectedPropertyType,
+    handlePropertyTypeChange,
+    displayedItems,
+    uniquePropertyTypes,
+  } = usePropertyTypes(propertiesList);
   const [isFiltersModalOpen, setIsFiltersModalOpen] = useState(false);
-  const [selectedPropertyType, setSelectedPropertyType] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
+
   const navigate = useNavigate();
 
-  const sortByQuery = searchParams.get("sort");
-  const orderQuery = searchParams.get("order");
-
-  const [minPrice, setMinPrice] = useState(20);
-  const [maxPrice, setMaxPrice] = useState(500);
-
-  const isMostPopularChecked =
-    sortByQuery === "popularity" && orderQuery === "desc";
-  const isLeastPopularChecked =
-    sortByQuery === "popularity" && orderQuery === "asc";
-  const isHighestCostChecked =
-    sortByQuery === "cost_per_night" && orderQuery === "desc";
-  const isLowestCostChecked =
-    sortByQuery === "cost_per_night" && orderQuery === "asc";
-
-  function fetchProperties() {
-    axios
-      .get("https://be-airbnc-zw86.onrender.com/api/properties", {
-        params: Object.fromEntries(searchParams.entries()),
-      })
-      .then((response) => {
-        setPropertiesList(response.data.properties);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-
-  useEffect(() => {
-    fetchProperties(); // Fetch all properties on initial load
-
-    const minPriceFromQuery = searchParams.get("minprice");
-    const maxPriceFromQuery = searchParams.get("maxprice");
-
-    if (minPriceFromQuery) {
-      setMinPrice(Number(minPriceFromQuery));
-    }
-    if (maxPriceFromQuery) {
-      setMaxPrice(Number(maxPriceFromQuery));
-    }
-  }, []);
-
-  function handleSortOption(sort, order) {
-    const newParams = new URLSearchParams(searchParams);
-    newParams.set("sort", sort);
-    newParams.set("order", order);
-    setSearchParams(newParams);
-  }
-
   function handlePropertyCardClick(propertyId) {
+    // Navigate to property page
     navigate(`/property/${propertyId}`);
   }
 
-  function handleMinPriceSliderChange(e) {
-    const newMinPrice = Number(e.target.value);
-    setMinPrice(newMinPrice); // update state
-
-    const newParams = new URLSearchParams(searchParams); // create a copy of all existing search parameters, including sort options
-    newParams.set("minprice", newMinPrice); // only update the minprice parameter
-    setSearchParams(newParams); // searchParams now include both the existing parameters and the new min price
-  }
-
-  function handleMaxPriceSliderChange(e) {
-    const newMaxPrice = Number(e.target.value);
-    setMaxPrice(newMaxPrice);
-
-    const newParams = new URLSearchParams(searchParams);
-    newParams.set("maxprice", newMaxPrice);
-    setSearchParams(newParams);
-  }
-
-  function handleSubmit(e) {
+  // Submit filters and trigger fetch
+  const handleSubmit = (e) => {
     e.preventDefault();
-    fetchProperties();
-  }
 
-  function handleFiltersBtnClick() {
-    setIsFiltersModalOpen(true);
-  }
+    const newParams = new URLSearchParams();
+    if (filters.minPrice !== 20) newParams.set("minprice", filters.minPrice);
+    if (filters.maxPrice !== 500) newParams.set("maxprice", filters.maxPrice);
+    if (filters.sort) newParams.set("sort", filters.sort);
+    if (filters.order) newParams.set("order", filters.order);
 
-  function handlePropertyTypeChange(e) {
-    const type = e.currentTarget.innerText;
-    setSelectedPropertyType((prevType) => (prevType === type ? "" : type));
-  }
-
-  const displayedItems = selectedPropertyType
-    ? propertiesList.filter(
-        (item) => item.property_type === selectedPropertyType
-      )
-    : propertiesList;
-
-  const uniquePropertyTypes = [];
-  propertiesList.forEach(({ property_type }) => {
-    if (!uniquePropertyTypes.includes(property_type)) {
-      uniquePropertyTypes.push(property_type);
-    }
-  });
-
-  function handleClearFilters() {
-    setSearchParams("");
-    setMinPrice(20);
-    setMaxPrice(500);
-  }
+    setSearchParams(newParams); // triggers API request
+    setIsFiltersModalOpen(false); // close modal
+  };
 
   return (
     <>
       <section className={styles.filtersContainer}>
         <div className={styles.leftSideFiltersContainer}>
           <button
-            onClick={handleFiltersBtnClick}
+            onClick={() => setIsFiltersModalOpen(true)}
             className={styles.filtersIcon}
             aria-label="Toggle filters"
           >
             <FontAwesomeIcon icon={faSliders} className={styles.bars} />
             Filters
           </button>
+
           {isFiltersModalOpen && (
             <Filters
-              minPrice={minPrice}
-              maxPrice={maxPrice}
-              isMostPopularChecked={isMostPopularChecked}
-              isLeastPopularChecked={isLeastPopularChecked}
-              isHighestCostChecked={isHighestCostChecked}
-              isLowestCostChecked={isLowestCostChecked}
-              handleSortOption={handleSortOption}
-              handleMinPriceSliderChange={handleMinPriceSliderChange}
-              handleMaxPriceSliderChange={handleMaxPriceSliderChange}
-              handleSubmit={handleSubmit}
+              {...filters}
               setIsFiltersModalOpen={setIsFiltersModalOpen}
-              handleClearFilters={handleClearFilters}
+              handleSubmit={handleSubmit}
             />
           )}
         </div>
 
-        <div className={styles.propertyTypesContainer}>
-          {isLoading ? (
-            Array.from({ length: 9 }).map((_, i) => (
-              <SkeletonPropertyTypes key={i} />
-            ))
-          ) : (
-            <PropertyTypes
-              propertyTypes={uniquePropertyTypes}
-              handlePropertyTypeChange={handlePropertyTypeChange}
-              selectedPropertyType={selectedPropertyType}
-            />
-          )}
-        </div>
+        <PropertyTypes
+          isLoading={isLoading}
+          propertyTypes={uniquePropertyTypes}
+          handlePropertyTypeChange={handlePropertyTypeChange}
+          selectedPropertyType={selectedPropertyType}
+        />
       </section>
 
       <section>
-        <div className={styles.listContainer} ref={propertiesRef}>
-          {isLoading
-            ? Array.from({ length: 12 }).map((_, i) => (
-                <SkeletonPropertyCard key={i} />
-              ))
-            : displayedItems.map(
-                ({
-                  images,
-                  property_name,
-                  location,
-                  cost_per_night,
-                  property_id,
-                }) => (
-                  <div
-                    key={property_id}
-                    className={styles.itemContainer}
-                    onClick={() => handlePropertyCardClick(property_id)}
-                  >
-                    <img
-                      src={images[0]}
-                      alt={property_name}
-                      className={styles.itemImg}
-                    />
-                    <h3 className={styles.propertyName}>{property_name}</h3>
-                    <p className={styles.propertyLocation}>{location}</p>
-                    <p className={styles.propertyPrice}>
-                      £{cost_per_night} night
-                    </p>
-                  </div>
-                )
-              )}
-        </div>
+        <PropertiesContainer
+          properties={displayedItems}
+          onCardClick={handlePropertyCardClick}
+          isLoading={isLoading}
+          propertiesRef={propertiesRef}
+        />
       </section>
     </>
   );
