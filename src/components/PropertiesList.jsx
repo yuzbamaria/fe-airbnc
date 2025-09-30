@@ -1,5 +1,4 @@
 import { useState, useEffect, useMemo } from "react";
-import axios from "axios";
 import styles from "./styles/PropertiesList.module.css";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Filters from "./Filters";
@@ -8,15 +7,16 @@ import { faSliders } from "@fortawesome/free-solid-svg-icons";
 import PropertiesContainer from "./PropertiesContainer";
 import PropertyTypes from "./PropertyTypes";
 
+import useFetchProperties from "../hooks/useFetchProperties";
+
 const DEFAULT_MIN_PRICE = 20;
 const DEFAULT_MAX_PRICE = 500;
 
 export default function PropertiesList({ propertiesRef }) {
-  const [propertiesList, setPropertiesList] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
+  const { propertiesList, isLoading } = useFetchProperties(searchParams);
   const [isFiltersModalOpen, setIsFiltersModalOpen] = useState(false);
   const [selectedPropertyType, setSelectedPropertyType] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
   const sortByQuery = searchParams.get("sort");
@@ -35,17 +35,7 @@ export default function PropertiesList({ propertiesRef }) {
     sortByQuery === "cost_per_night" && orderQuery === "asc";
 
   function fetchProperties() {
-    axios
-      .get("https://be-airbnc-zw86.onrender.com/api/properties", {
-        params: Object.fromEntries(searchParams.entries()),
-      })
-      .then((response) => {
-        setPropertiesList(response.data.properties);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    
   }
 
   useEffect(() => {
